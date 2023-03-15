@@ -2,20 +2,22 @@ package core
 
 import (
 	"errors"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type StringTestConverter struct {
 }
 
-func getFactory() func(data string) string {
-	return func(data string) string { return data + "1" }
+func (converter StringTestConverter) Convert(data string) (string, error) {
+	return data + "1", nil
 }
 
 func TestTransformPresenter_Should_PresentStringData_And_PrintStringConvertResult(t *testing.T) {
 	assert := assert.New(t)
-	initialPresenter := TransformPresenter[string, string]{factory: getFactory()}
+	converter := StringTestConverter{}
+	initialPresenter := TransformPresenter[string, string]{Converter: converter}
 	var presenterIn IPresentIn[string] = &initialPresenter
 	var presenterOut IPresentOut[string] = &initialPresenter
 	presenterIn.Present("1", nil)
@@ -25,7 +27,8 @@ func TestTransformPresenter_Should_PresentStringData_And_PrintStringConvertResul
 
 func TestTransformPresenter_Should_Return_Error(t *testing.T) {
 	assert := assert.New(t)
-	initialPresenter := TransformPresenter[string, string]{factory: getFactory()}
+	converter := StringTestConverter{}
+	initialPresenter := TransformPresenter[string, string]{Converter: converter}
 	var presenterIn IPresentIn[string] = &initialPresenter
 	var presenterOut IPresentOut[string] = &initialPresenter
 	presenterIn.Present("1", errors.New("Error !!"))

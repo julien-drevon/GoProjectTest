@@ -1,9 +1,5 @@
 package core
 
-// type IConverting[TDataIn any, TDataOut any] interface {
-// 	Convert(TDataIn) (TDataOut, error)
-// }
-
 type TransformPresenter[TDataIn any, TDataOut any] struct {
 	Result    TDataIn
 	Err       error
