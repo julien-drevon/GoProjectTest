@@ -6,6 +6,6 @@ import (
 
 type DateTimeNowProvider struct{}
 
-func (provider *DateTimeNowProvider) GetDateTime() (time.Time, error) {
-	return time.Now(), nil
+func (provider *DateTimeNowProvider) GetDateTime() time.Time {
+	return time.Now()
 }

@@ -22,7 +22,7 @@ func TestPaginationResult_New_AssignVlues(t *testing.T) {
 
 func TestPaginationResult_New_TotalValue(t *testing.T) {
 	assert := assert.New(t)
-	result := NewPaginationResult([]int{1}, 42, 1, 2)
+	result := NewPaginationResult([]int{1}, 42, 1, 1)
 	want := 42
 	assert.Equal(want, result.Pagination.Total)
 }

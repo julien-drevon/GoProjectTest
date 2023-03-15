@@ -17,7 +17,7 @@ type IExecuteUseCase[TQuery any, TData any] interface {
 }
 
 type IProvideDateTime interface {
-	GetDateTime() (time.Time, error)
+	GetDateTime() time.Time
 }
 
 type IConverting[TDataIn any, TDataOut any] interface {
