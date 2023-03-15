@@ -25,7 +25,7 @@ func TestTransformPresenter_Should_PresentStringData_And_PrintStringConvertResul
 	assert.Equal(val, "11")
 }
 
-func TestTransformPresenter_Should_Return_Error(t *testing.T) {
+func TestTransformPresenter_Should_Return_Error_If_UsedCaseError(t *testing.T) {
 	assert := assert.New(t)
 	converter := StringTestConverter{}
 	initialPresenter := TransformPresenter[string, string]{Converter: converter}
@@ -34,4 +34,15 @@ func TestTransformPresenter_Should_Return_Error(t *testing.T) {
 	presenterIn.Present("1", errors.New("Error !!"))
 	_, err := presenterOut.Print()
 	assert.Equal(err, errors.New("Error !!"))
+}
+
+func TestTransformPresenter_Should_Return_Error_IF_ConverterNotInject(t *testing.T) {
+	assert := assert.New(t)
+
+	initialPresenter := TransformPresenter[string, string]{Converter: nil}
+	var presenterIn IPresentIn[string] = &initialPresenter
+	var presenterOut IPresentOut[string] = &initialPresenter
+	presenterIn.Present("1", nil)
+	_, err := presenterOut.Print()
+	assert.Equal(err, errors.New("Converter must be inject in TransformerPresenter"))
 }
