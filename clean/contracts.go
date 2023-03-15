@@ -23,3 +23,15 @@ type IProvideDateTime interface {
 type IConverting[TDataIn any, TDataOut any] interface {
 	Convert(TDataIn) (TDataOut, error)
 }
+
+type Pagination struct {
+	CurrentPage int   `json:"CurrentPage"`
+	HasNext     bool  `json:"hasNext"`
+	HasPrevious bool  `json:"hasPrevious"`
+	IsFirst     bool  `json:"isFirst"`
+	IsLast      bool  `json:"isLast"`
+	PageNumber  int64 `json:"pageNumber"`
+	PageIndex   int   `json:"pageIndex"`
+	PageSize    int   `json:"pageSize"`
+	Total       int   `json:"total"`
+}

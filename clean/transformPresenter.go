@@ -2,6 +2,8 @@ package core
 
 import "errors"
 
+const CONVERTER_NOT_INJECT_MESSAGE = "Converter must be inject in TransformerPresenter"
+
 type TransformPresenter[TDataIn any, TDataOut any] struct {
 	Result    TDataIn
 	Err       error
@@ -15,7 +17,7 @@ func ConvertData[TDataIn any, TDataOut any](converter IConverting[TDataIn, TData
 	}
 
 	var zeroValue TDataOut
-	return zeroValue, errors.New("Converter must be inject in TransformerPresenter")
+	return zeroValue, errors.New(CONVERTER_NOT_INJECT_MESSAGE)
 }
 
 func (presenter *TransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err error) {
