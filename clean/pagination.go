@@ -20,8 +20,8 @@ type Pagination struct {
 
 func NewPaginationResult[TData any](values []TData, total int, currentPage int, pageSizeRequest int) PaginationResult[TData] {
 	pageNumber := SetToMin1(currentPage)
-	totalPage := ComputeNbOfPage(total, len(values))
 	totalElement := SetToMin0(total)
+	totalPage := ComputeNbOfPage(totalElement, len(values))
 	pageSizeDesired := SetToMin0(pageSizeRequest)
 
 	return PaginationResult[TData]{
@@ -30,7 +30,7 @@ func NewPaginationResult[TData any](values []TData, total int, currentPage int, 
 			Total:       totalElement,
 			TotalPage:   totalPage,
 			CurrentPage: pageNumber,
-			HasNext:     pageNumber < totalElement,
+			HasNext:     pageNumber < totalPage,
 			HasPrevious: pageNumber > 1,
 			PageSize:    pageSizeDesired,
 		}}
