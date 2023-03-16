@@ -1,20 +1,27 @@
 package domain
 
 import (
+	"clean/core"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDebile(t *testing.T) {
+type GetPokemonServiceStub struct {
+}
+
+func (service GetPokemonServiceStub) Get(query GetPokemonQuery) ([]Pokemon, error) {
+	return []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, nil
+}
+func Test_GetAllPokemon(t *testing.T) {
 	assert := assert.New(t)
 
-	// query := AddPokemonQuery{Name: "pikatchu"}
-	// useCase := AddPokemonInPokedex{IAddPokemon: AddOnePokemonServiceStub{}}
-	// presenter := &core.SimplePresenter[[]Pokemon]{}
-	// wait := []Pokemon{{Name: "pikatchu"}}
-	// useCase.Execute(query, presenter)
-	// result, _ := presenter.Print()
+	query := GetPokemonQuery{}
+	useCase := GetPokemonInPokedex{IGetPokemon: GetPokemonServiceStub{}}
+	presenter := &core.SimplePresenter[[]Pokemon]{}
+	wait := []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}
+	useCase.Execute(query, presenter)
+	result, _ := presenter.Print()
 
-	assert.Equal(true, true)
+	assert.Equal(wait, result)
 }
