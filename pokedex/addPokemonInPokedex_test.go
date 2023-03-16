@@ -10,8 +10,8 @@ import (
 type AddOnePokemonServiceStub struct {
 }
 
-func (service AddOnePokemonServiceStub) Add(query AddPokemonQuery) ([]Pokemon, error) {
-	return []Pokemon{{Name: "pikatchu"}}, nil
+func (service AddOnePokemonServiceStub) Add(query AddPokemonQuery) (core.PaginationResult[Pokemon], error) {
+	return core.NewPaginationResult([]Pokemon{{Name: "pikatch"}}, 1, 1, 0), nil
 }
 
 func Test_AddOnePokemon(t *testing.T) {
@@ -19,8 +19,8 @@ func Test_AddOnePokemon(t *testing.T) {
 
 	query := AddPokemonQuery{Name: "pikatchu"}
 	useCase := AddPokemonInPokedex{IAddPokemon: AddOnePokemonServiceStub{}}
-	presenter := &core.SimplePresenter[[]Pokemon]{}
-	wait := []Pokemon{{Name: "pikatchu"}}
+	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
+	wait := core.NewPaginationResult([]Pokemon{{Name: "pikatch"}}, 1, 1, 0)
 	useCase.Execute(query, presenter)
 	result, _ := presenter.Print()
 

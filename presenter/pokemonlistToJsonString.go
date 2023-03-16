@@ -15,7 +15,7 @@ func (converter PokemonListToJsonStringConverter) Convert(data core.PaginationRe
 	return string(emp3), nil
 }
 
-func NewPokemonlistToJsonStringPresenter() core.TransformPresenter[core.PaginationResult[domain.Pokemon], string] {
+func NewPokemonListToJsonStringPresenter() core.TransformPresenter[core.PaginationResult[domain.Pokemon], string] {
 	return core.TransformPresenter[core.PaginationResult[domain.Pokemon], string]{
 		Converter: PokemonListToJsonStringConverter{},
 	}

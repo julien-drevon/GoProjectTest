@@ -3,16 +3,21 @@ package main
 import (
 	"bufio"
 	"clean/core"
+	"controller"
 	"fmt"
 	"os"
 	"pokedex/domain"
-	"presenter"
 	"strings"
 )
+
+type configuration struct {
+	pokemonLi []domain.Pokemon
+}
 
 func main() {
 
 	quit := false
+	config := configuration{pokemonLi: make([]domain.Pokemon, 0)}
 
 	for !quit {
 		reader := bufio.NewReader(os.Stdin)
@@ -22,7 +27,7 @@ func main() {
 		case "q":
 			quit = true
 		case "1":
-			ViewPokemon()
+			ViewPokemon(config)
 		default:
 		}
 
@@ -32,22 +37,21 @@ func AddPokemon() {
 	fmt.Println("unimplemented")
 }
 
-func ViewPokemon() {
-	pres, _ := GetPresenter()
-	fmt.Println(pres.Print())
+func ViewPokemon(config configuration) {
+	str, _ := GetPresenter(config).Print()
+	fmt.Println(str)
 }
 
-func GetPresenter() (core.IPresentOut[string], error) {
-	pres := &core.TransformPresenter[core.PaginationResult[domain.Pokemon], string]{Converter: presenter.PokemonListToJsonStringConverter{}}
-	li := core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}, 2, 1, 0)
-	pres.Present(li, nil)
-	return pres, nil
+func GetPresenter(config configuration) core.IPresentOut[string] {
+	controller := controller.NewControllerJSonAndMemory(config.pokemonLi)
+	presenter := controller.GetMyPokemons()
+	return presenter
 }
 
 func AffichageMenu() {
 	fmt.Println("Hello  Bienvenu sur votre pokedex!!")
 	fmt.Println("choisissez :")
-	fmt.Println("1. Ajouter un pokemon")
+	fmt.Println("1. Voir mes pokemons")
 	fmt.Println(("q. Quit"))
 }
 

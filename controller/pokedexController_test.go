@@ -5,8 +5,7 @@ import (
 	// "pokedex/domain"
 	// "presenter"
 
-	"gateway"
-	"presenter"
+	"pokedex/domain"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,12 +17,22 @@ import (
 
 func TestGetPokemonIntegration(t *testing.T) {
 	assert := assert.New(t)
-
-	controller := PokedexController[[]string]{Presenter: presenter.NewPokemonlistTostringConverterPresenter(), Gateway: gateway.GetAllMyPokemonService{}}
+	controller := NewControllerJSonAndMemory(make([]domain.Pokemon, 0))
 	presenter := controller.GetMyPokemons()
 
-	expected := []string{"pikatchu", "tortank"}
+	expected := "[]"
 	actual, _ := presenter.Print()
 
 	assert.Equal(expected, actual)
 }
+
+// func TestAddPokemonIntegration(t *testing.T) {
+// 	assert := assert.New(t)
+// 	controller := NewControllerJSonAndMemory(make([]domain.Pokemon, 0))
+// 	presenter := controller.AddPokemon("pikatch")
+
+// 	expected := "[{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
+// 	actual, _ := presenter.Print()
+
+// 	assert.Equal(expected, actual)
+// }
