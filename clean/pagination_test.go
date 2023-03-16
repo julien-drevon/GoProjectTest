@@ -82,3 +82,16 @@ func TestPaginationResult_New_EnterBadValue(t *testing.T) {
 	}
 	assert.Equal(want, result.Pagination)
 }
+func TestPaginationResult_New_GetAll(t *testing.T) {
+	assert := assert.New(t)
+	result := NewPaginationResult([]int{1, 2, 3, 4, 5}, 5, 1, 0)
+	want := Pagination{
+		CurrentPage: 1,
+		HasNext:     false,
+		HasPrevious: false,
+		TotalPage:   1,
+		PageSize:    5,
+		Total:       5,
+	}
+	assert.Equal(want, result.Pagination)
+}
