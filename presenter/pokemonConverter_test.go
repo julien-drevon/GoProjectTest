@@ -1,4 +1,4 @@
-package pokemon
+package presenter
 
 import (
 	"clean/core"
@@ -14,7 +14,7 @@ func GetPokelist() core.PaginationResult[domain.Pokemon] {
 
 func TestPokemonToString(t *testing.T) {
 	assert := assert.New(t)
-	converter := PokemonlistTostringConverter{}
+	converter := PokemonListToStringConverter{}
 
 	expected := []string{"pikatchu", "tortank"}
 	actual, _ := converter.Convert(GetPokelist())
@@ -24,7 +24,7 @@ func TestPokemonToString(t *testing.T) {
 
 func TestPokemonToJson(t *testing.T) {
 	assert := assert.New(t)
-	converter := PokemonlistToJsonString{}
+	converter := PokemonListToJsonStringConverter{}
 
 	expected := "[{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
 	actual, _ := converter.Convert(GetPokelist())

@@ -1,4 +1,4 @@
-package pokemon
+package presenter
 
 import (
 	"clean/core"
@@ -6,9 +6,15 @@ import (
 	"pokedex/domain"
 )
 
-type PokemonlistTostringConverter struct {
+type PokemonListToStringConverter struct {
 }
 
-func (converter PokemonlistTostringConverter) Convert(data core.PaginationResult[domain.Pokemon]) ([]string, error) {
+func (converter PokemonListToStringConverter) Convert(data core.PaginationResult[domain.Pokemon]) ([]string, error) {
 	return linq.Select(data.Result, func(x domain.Pokemon) string { return x.Name }), nil
+}
+
+func NewPokemonlistTostringConverterPresenter() core.TransformPresenter[core.PaginationResult[domain.Pokemon], []string] {
+	return core.TransformPresenter[core.PaginationResult[domain.Pokemon], []string]{
+		Converter: PokemonListToStringConverter{},
+	}
 }
