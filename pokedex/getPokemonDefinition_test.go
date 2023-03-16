@@ -7,18 +7,18 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type GetAllMyPokemonStub struct {
+type GetAllPokemonsDefinition struct {
 }
 
-func (service GetAllMyPokemonStub) Get(query GetPokemonQuery) (core.PaginationResult[Pokemon], error) {
+func (service GetAllPokemonsDefinition) Get(query GetPokemonQuery) (core.PaginationResult[Pokemon], error) {
 	return core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 2, 1, 0), nil
 }
 
-func Test_GetAllMyPokemon(t *testing.T) {
+func Test_GetAllPokemonsDefinition(t *testing.T) {
 	assert := assert.New(t)
 
 	query := GetPokemonQuery{}
-	useCase := GetPokemonInPokedex{IGetPokedemon: GetAllMyPokemonStub{}}
+	useCase := GetPokemonDefinition{IGetPokedex: GetAllPokemonsDefinition{}}
 	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
 	wait := core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 2, 1, 0)
 	useCase.Execute(query, presenter)
