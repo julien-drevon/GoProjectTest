@@ -8,10 +8,6 @@ import (
 type PokemonlistTostringConverter struct {
 }
 
-// func NewPokemonlistTostringConverter() core.IConverting[core.PaginationResult[domain.Pokemon], string] {
-
-// }
-
 func (converter PokemonlistTostringConverter) Convert(data core.PaginationResult[domain.Pokemon]) (string, error) {
 	return "pikatchu\ntortank", nil
 }
