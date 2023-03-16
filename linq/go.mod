@@ -1,4 +1,4 @@
-module linq/core
+module linq
 
 go 1.20
 

@@ -1,4 +1,4 @@
-package core
+package linq
 
 func Where[T any](typeForTest []T, where func(T) bool) []T {
 	result := make([]T, 0)
