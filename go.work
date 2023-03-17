@@ -8,4 +8,5 @@ use (
 	./linq
 	./pokedex
 	./presenter
+	./webServices
 )

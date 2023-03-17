@@ -6,29 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type TypeForTest struct {
-	Name string
-}
-
-func Test_SimpleWhere(t *testing.T) {
-	assert := assert.New(t)
-
-	expected := []TypeForTest{{Name: "42"}}
-	actual := Where([]TypeForTest{{Name: "42"}, {Name: "moi"}}, (func(x TypeForTest) bool { return x.Name == "42" }))
-
-	assert.Equal(expected, actual)
-}
-func Test_LongWhere(t *testing.T) {
-	assert := assert.New(t)
-
-	expected := []TypeForTest{{Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}}
-	actual := Where(
-		[]TypeForTest{{Name: "42"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "moi"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}, {Name: "42"}},
-		func(x TypeForTest) bool { return x.Name == "42" })
-
-	assert.Equal(expected, actual)
-}
-
 func Test_SimpleSelect(t *testing.T) {
 	assert := assert.New(t)
 
@@ -54,16 +31,6 @@ func Test_EmptySelect(t *testing.T) {
 	actual := Select(
 		[]TypeForTest{},
 		(func(x TypeForTest) string { return x.Name }))
-
-	assert.Equal(expected, actual)
-}
-func Test_EmptyWhere(t *testing.T) {
-	assert := assert.New(t)
-
-	expected := []string{}
-	actual := Where(
-		[]TypeForTest{},
-		func(x TypeForTest) bool { return x.Name == "42" })
 
 	assert.Equal(expected, actual)
 }
