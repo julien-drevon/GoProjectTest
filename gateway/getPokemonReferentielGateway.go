@@ -6,7 +6,6 @@ import (
 )
 
 type GetPokemonReferentielGateway struct {
-	PokeList []domain.Pokemon
 }
 
 var POKEDEX []domain.Pokemon = []domain.Pokemon{
