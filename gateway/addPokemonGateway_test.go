@@ -19,7 +19,7 @@ import (
 func Test2AddPokemonMemory(t *testing.T) {
 	assert := assert.New(t)
 
-	service := AddPokemonService{PokeList: []domain.Pokemon{}}
+	service := AddPokemonGateway{PokeList: []domain.Pokemon{}}
 	expected := core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}, 2, 1, 0)
 	actual, _ := service.Add(domain.AddPokemonQuery{Names: []string{"pikatchu", "tortank"}})
 
@@ -28,7 +28,7 @@ func Test2AddPokemonMemory(t *testing.T) {
 func Test2AddPokemonMemoryWithOther(t *testing.T) {
 	assert := assert.New(t)
 
-	service := AddPokemonService{PokeList: []domain.Pokemon{{Name: "draco feu"}}}
+	service := AddPokemonGateway{PokeList: []domain.Pokemon{{Name: "draco feu"}}}
 	service.Add(domain.AddPokemonQuery{Names: []string{"pikatchu", "tortank"}})
 
 	expected := []domain.Pokemon{{Name: "draco feu"}, {Name: "pikatchu"}, {Name: "tortank"}}
