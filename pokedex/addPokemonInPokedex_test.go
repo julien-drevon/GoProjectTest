@@ -20,9 +20,10 @@ func Test_AddOnePokemon(t *testing.T) {
 	query := AddPokemonQuery{Name: "pikatchu"}
 	useCase := AddPokemonInPokedex{IAddPokemon: AddOnePokemonServiceStub{}}
 	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
-	wait := core.NewPaginationResult([]Pokemon{{Name: "pikatch"}}, 1, 1, 0)
 	useCase.Execute(query, presenter)
-	result, _ := presenter.Print()
 
-	assert.Equal(wait, result)
+	actual, _ := presenter.Print()
+	expected := core.NewPaginationResult([]Pokemon{{Name: "pikatch"}}, 1, 1, 0)
+
+	assert.Equal(expected, actual)
 }

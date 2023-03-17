@@ -2,9 +2,6 @@ package domain
 
 import "clean/core"
 
-type GetPokemonQuery struct {
-}
-
 type GetPokemonInPokedex struct {
 	IGetPokedemon
 }

@@ -9,5 +9,5 @@ type IGetPokedemon interface {
 	Get(GetPokemonQuery) (core.PaginationResult[Pokemon], error)
 }
 type IGetPokedex interface {
-	Get(GetPokemonQuery) (core.PaginationResult[Pokemon], error)
+	GetPokedex(GetPokemonQuery) (core.PaginationResult[Pokemon], error)
 }
