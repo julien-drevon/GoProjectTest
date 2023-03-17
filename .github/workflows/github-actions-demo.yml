@@ -28,6 +28,7 @@ jobs:
       - run: cd clean && go mod tidy && go test -v    
       - run: cd pokedex && go mod tidy && go test -v 
       - run:  cd presenter && go mod tidy && go test -v 
+      - run:  cd controller && go mod tidy && go test -v     
 
 
 # name: GitHub Actions Demo
