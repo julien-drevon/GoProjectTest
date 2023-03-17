@@ -18,3 +18,12 @@ func Select[T any, K any](typeForTest []T, projection func(x T) K) []K {
 
 	return result
 }
+func Any[T any](typeForTest []T, any func(T) bool) bool {
+
+	for _, v := range typeForTest {
+		if any(v) {
+			return true
+		}
+	}
+	return false
+}
