@@ -1,0 +1,11 @@
+go 1.20
+
+use (
+	./appliConsole
+	./clean
+	./controller
+	./gateway
+	./linq
+	./pokedex
+	./presenter
+)

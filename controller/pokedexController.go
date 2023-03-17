@@ -23,10 +23,10 @@ func (this PokedexController[T]) GetMyPokemons() core.IPresentOut[T] {
 func (this PokedexController[T]) AddPokemons(name string) core.IPresentOut[T] {
 	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
 	presenter := this.ListPresenter()
-	useCase.Execute(domain.AddPokemonQuery{Name: name}, &presenter)
+	useCase.Execute(domain.AddPokemonQuery{Names: []string{name}}, &presenter)
 	return presenter
 }
 
 func NewControllerJSonAndMemory(pokemonLi []domain.Pokemon) PokedexController[string] {
-	return PokedexController[string]{ListPresenter: presenter.NewPokemonListToJsonStringPresenter, GetPokemonGateway: gateway.GetAllMyPokemonService{PokeList: pokemonLi}}
+	return PokedexController[string]{ListPresenter: presenter.NewPokemonListToJsonStringPresenter, GetPokemonGateway: gateway.GetAllMyPokemonGateway{PokeList: pokemonLi}}
 }

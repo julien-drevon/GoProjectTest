@@ -17,7 +17,7 @@ func (service AddOnePokemonServiceStub) Add(query AddPokemonQuery) (core.Paginat
 func Test_AddOnePokemon(t *testing.T) {
 	assert := assert.New(t)
 
-	query := AddPokemonQuery{Name: "pikatchu"}
+	query := AddPokemonQuery{Names: []string{"ikatchu"}}
 	useCase := AddPokemonInPokedex{IAddPokemon: AddOnePokemonServiceStub{}}
 	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
 	useCase.Execute(query, presenter)
