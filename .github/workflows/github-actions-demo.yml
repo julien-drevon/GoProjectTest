@@ -25,17 +25,9 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version-file: './go.work'
-      - run: cd clean
-      - run: ls -al 
-      #- run: go mod tidy
-      - run: go test -v ./..
-      - run: cd ..\pokedex\
-      - run: go mod tidy
-      - run: go test -v
-      - run:  cd ..\presenter\
-      - run: go mod tidy
-      - run: go test -v
-
+      - run: cd clean && go mod tidy && go test -v    
+      - run: cd pokedex && go mod tidy && go test -v 
+      - run:  cd presenter && go mod tidy && go test -v 
 
 
 # name: GitHub Actions Demo
