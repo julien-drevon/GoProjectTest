@@ -21,8 +21,8 @@ func TestTransformPresenter_Should_PresentStringData_And_PrintStringConvertResul
 	var presenterIn IPresentIn[string] = &initialPresenter
 	var presenterOut IPresentOut[string] = &initialPresenter
 	presenterIn.Present("1", nil)
-	val, _ := presenterOut.Print()
-	assert.Equal(val, "11")
+	actual, _ := presenterOut.Print()
+	assert.Equal("11", actual)
 }
 
 func TestTransformPresenter_Should_Return_Error_If_UsedCaseError(t *testing.T) {

@@ -4,9 +4,12 @@ package domain
 // 	Execute(TQuery, IPresentIn[TData])
 // }
 type AddPokemonQuery struct {
-	Name string `json:"name"`
+	Names []string `json:"names"`
 }
 
 type Pokemon struct {
+	Name string `json:"name"`
+}
+type GetPokemonQuery struct {
 	Name string `json:"name"`
 }
