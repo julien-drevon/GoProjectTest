@@ -5,6 +5,10 @@ import (
 	"errors"
 )
 
+type MappingError struct {
+	Message string
+}
+
 func Where[T any](typeForTest []T, where func(T) bool) []T {
 	result := make([]T, 0)
 	for _, v := range typeForTest {
@@ -31,10 +35,6 @@ func Any[T any](typeForTest []T, any func(T) bool) bool {
 		}
 	}
 	return false
-}
-
-type MappingError struct {
-	Message string
 }
 
 func Mapper[T any](initialValue T, conversion func(T) (T, error)) (T, error) {
@@ -64,5 +64,4 @@ func NewMappingError(err string) error {
 	}
 	jsonByte, _ := json.Marshal(er)
 	return errors.New(string(jsonByte))
-	//return errors.New("")
 }
