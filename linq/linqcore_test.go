@@ -47,3 +47,23 @@ func Test_longSelect(t *testing.T) {
 
 	assert.Equal(expected, actual)
 }
+func Test_EmptySelect(t *testing.T) {
+	assert := assert.New(t)
+
+	expected := []string{}
+	actual := Select(
+		[]TypeForTest{},
+		(func(x TypeForTest) string { return x.Name }))
+
+	assert.Equal(expected, actual)
+}
+func Test_EmptyWhere(t *testing.T) {
+	assert := assert.New(t)
+
+	expected := []string{}
+	actual := Where(
+		[]TypeForTest{},
+		func(x TypeForTest) bool { return x.Name == "42" })
+
+	assert.Equal(expected, actual)
+}
