@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+const CONVERTER_NOT_INJECT_MESSAGE = "Converter must be inject in TransformerPresenter"
+
 type IPresentIn[TData any] interface {
 	Present(TData, error)
 }
@@ -22,4 +24,8 @@ type IProvideDateTime interface {
 
 type IConverting[TDataIn any, TDataOut any] interface {
 	Convert(TDataIn) (TDataOut, error)
+}
+
+type IAsyncConverting[TDataIn any, TDataOut any] interface {
+	ConvertAsync(TDataIn, chan TDataOut, chan error)
 }

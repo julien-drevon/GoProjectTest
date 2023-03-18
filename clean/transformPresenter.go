@@ -1,8 +1,8 @@
 package core
 
-import "errors"
-
-const CONVERTER_NOT_INJECT_MESSAGE = "Converter must be inject in TransformerPresenter"
+import (
+	"errors"
+)
 
 type TransformPresenter[TDataIn any, TDataOut any] struct {
 	Result    TDataIn
