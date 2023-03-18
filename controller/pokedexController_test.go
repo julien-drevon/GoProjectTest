@@ -45,6 +45,7 @@ func TestAddAndGetPokemonIntegration(t *testing.T) {
 	actual, _ := presenter.Print()
 	assert.Equal(expected, actual)
 }
+
 func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
 	//Given
 	assert := assert.New(t)

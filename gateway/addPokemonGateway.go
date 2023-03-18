@@ -1,10 +1,8 @@
 package gateway
 
 import (
-	"errors"
 	"linq"
 	"pokedex/domain"
-	"strings"
 )
 
 type AddPokemonGateway struct {
@@ -12,14 +10,18 @@ type AddPokemonGateway struct {
 }
 
 func (this AddPokemonGateway) Add(query domain.AddPokemonsQuery) (domain.PokemonsPlayer, error) {
-	if strings.Trim(query.Player, " ") == "" {
-		var defaut domain.PokemonsPlayer
-		return defaut, errors.New("Player should not be empty")
-	}
-	pokeSelect := linq.Select(query.Names, func(x string) domain.Pokemon { return domain.Pokemon{Name: x} })
+
+	pokeSelect := TransformQueryToPokemon(query)
+	AddInContext(pokeSelect, this, query)
+
+	return domain.PokemonsPlayer{Player: query.Player, Pokemons: pokeSelect}, nil
+}
+func TransformQueryToPokemon(query domain.AddPokemonsQuery) []domain.Pokemon {
+	return linq.Select(query.Names, func(x string) domain.Pokemon { return domain.Pokemon{Name: x} })
+}
+
+func AddInContext(pokeSelect []domain.Pokemon, this AddPokemonGateway, query domain.AddPokemonsQuery) {
 	for _, v := range pokeSelect {
 		this.Context.Add(query.Player, v)
 	}
-
-	return domain.PokemonsPlayer{Player: query.Player, Pokemons: pokeSelect}, nil
 }

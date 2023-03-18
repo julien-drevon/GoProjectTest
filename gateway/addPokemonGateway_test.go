@@ -1,22 +1,12 @@
 package gateway
 
 import (
-	"errors"
 	"pokedex/domain"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAddPokemonWithEmptyName(t *testing.T) {
-	assert := assert.New(t)
-	repo := NewRepo()
-	service := AddPokemonGateway{Context: &repo}
-	expected := errors.New("Player should not be empty")
-	_, actual := service.Add(domain.AddPokemonsQuery{Names: []string{"pikatchu", "tortank"}})
-
-	assert.Equal(expected, actual)
-}
 func Test2AddPokemonMemory(t *testing.T) {
 	assert := assert.New(t)
 	repo := NewRepo()

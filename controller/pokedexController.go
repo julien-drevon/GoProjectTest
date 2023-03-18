@@ -19,6 +19,7 @@ func (this PokedexController[T]) GetMyPokemons(player string) core.IPresentOut[T
 	useCase := domain.GetPokemonInPokedex{IGetPokedemon: this.GetPokemonGateway}
 	presenter := this.ListPresenter()
 	useCase.Execute(domain.GetPokemonQuery{Player: player}, &presenter)
+
 	return presenter
 }
 
@@ -48,6 +49,7 @@ func (this PokedexController[T]) GetReferentiel() core.IPresentOut[T] {
 }
 
 func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
+
 	return PokedexController[string]{
 		ListPresenter:        presenter.NewPokemonPlayerToJsonStringPresenter,
 		ReferentielPresenter: presenter.NewPokemonListToJsonStringPresenter,
