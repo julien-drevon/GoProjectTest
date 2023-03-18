@@ -35,3 +35,9 @@ func NewPokemonPlayerToJsonStringPresenter() core.TransformPresenter[domain.Poke
 		Converter: PokemonPlayerToJsonStringConverter{},
 	}
 }
+
+func NewPaginedListPokemonToJsonStringPresenter() core.TransformPresenter[domain.PokemonsPlayer, string] {
+	return core.TransformPresenter[domain.PokemonsPlayer, string]{
+		Converter: PokemonPlayerToJsonStringConverter{},
+	}
+}

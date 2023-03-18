@@ -14,6 +14,6 @@ var POKEDEX []domain.Pokemon = []domain.Pokemon{
 	{Name: "tortank"},
 }
 
-func (this GetPokemonReferentielGateway) Get(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
+func (this GetPokemonReferentielGateway) GetPokedex(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
 	return core.NewPaginationResult(POKEDEX, len(POKEDEX), 1, 0), nil
 }

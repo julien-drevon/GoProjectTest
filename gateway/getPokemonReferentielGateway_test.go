@@ -13,7 +13,7 @@ func TestGetdPokemonReferentiel(t *testing.T) {
 
 	service := GetPokemonReferentielGateway{}
 	expected := core.NewPaginationResult([]domain.Pokemon{{Name: "draco feu"}, {Name: "pikatchu"}, {Name: "tortank"}}, 3, 1, 0)
-	actual, _ := service.Get(domain.GetPokemonQuery{})
+	actual, _ := service.GetPokedex(domain.GetPokemonQuery{})
 
 	assert.Equal(expected, actual)
 }

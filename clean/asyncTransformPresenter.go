@@ -4,8 +4,6 @@ import (
 	"errors"
 )
 
-//const CONVERTER_NOT_INJECT_MESSAGE = "Converter must be inject in TransformerPresenter"
-
 type AsyncTransformPresenter[TDataIn any, TDataOut any] struct {
 	Result      TDataIn
 	Err         error
@@ -40,7 +38,7 @@ func (presenter AsyncTransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, e
 		return zeroval, presenter.Err
 	}
 
-	return presenter.TransResult, presenter.TransError //ConvertDataAsync(presenter.Converter, presenter.Result)
+	return presenter.TransResult, presenter.TransError
 }
 
 func (this *AsyncTransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformePresenter(err error) {
