@@ -14,5 +14,8 @@ func (this *Repo[T]) Add(data T) {
 
 func NewRepo[T any]() Repo[T] {
 	return Repo[T]{Context: []T{}}
+}
 
+func NewRepoWithContext[T any](context []T) Repo[T] {
+	return Repo[T]{Context: context}
 }

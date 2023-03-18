@@ -27,12 +27,12 @@ func Test2AddPokemonMemory(t *testing.T) {
 }
 func Test2AddPokemonMemoryWithOther(t *testing.T) {
 	assert := assert.New(t)
-	repo := NewRepo[domain.Pokemon]()
+	repo := NewRepoWithContext([]domain.Pokemon{{Name: "draco feu"}})
 	service := AddPokemonGateway{Context: &repo}
 	service.Add(domain.AddPokemonQuery{Names: []string{"pikatchu", "tortank"}})
 
 	expected := []domain.Pokemon{{Name: "draco feu"}, {Name: "pikatchu"}, {Name: "tortank"}}
-	actual := service.Context
+	actual := service.Context.Get()
 
 	assert.Equal(expected, actual)
 }
