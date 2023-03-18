@@ -2,11 +2,9 @@ package controller
 
 import (
 	"clean/core"
-	"errors"
 	"gateway"
 	"pokedex/domain"
 	"presenter"
-	"strings"
 )
 
 type PokedexController[T any] struct {
@@ -26,7 +24,7 @@ func (this PokedexController[T]) AddPokemons(player string, names []string) core
 
 	presenter := this.ListPresenter()
 	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
-	query, err := CreatePokemonQuery(player, names)
+	query, err := domain.CreatePokemonAddQuery(player, names)
 
 	if err != nil {
 		this.PokemonPlayerErrorPresenter(&presenter, err)
@@ -40,14 +38,6 @@ func (this PokedexController[T]) AddPokemons(player string, names []string) core
 func (this PokedexController[T]) PokemonPlayerErrorPresenter(presenter core.IPresentIn[domain.PokemonsPlayer], err error) {
 	var zeroVal domain.PokemonsPlayer
 	presenter.Present(zeroVal, err)
-}
-
-func CreatePokemonQuery(player string, names []string) (domain.AddPokemonsQuery, error) {
-	var retour domain.AddPokemonsQuery
-	if strings.TrimSpace(player) == "" {
-		return retour, errors.New("player should not be empty")
-	}
-	return domain.AddPokemonsQuery{Player: player, Names: names}, nil
 }
 
 func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
