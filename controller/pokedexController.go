@@ -13,17 +13,17 @@ type PokedexController[T any] struct {
 	AddPokemonGateway domain.IAddPokemon
 }
 
-func (this PokedexController[T]) GetMyPokemons() core.IPresentOut[T] {
+func (this PokedexController[T]) GetMyPokemons(player string) core.IPresentOut[T] {
 	useCase := domain.GetPokemonInPokedex{IGetPokedemon: this.GetPokemonGateway}
 	presenter := this.ListPresenter()
-	useCase.Execute(domain.GetPokemonQuery{}, &presenter)
+	useCase.Execute(domain.GetPokemonQuery{Player: player}, &presenter)
 	return presenter
 }
 
-func (this PokedexController[T]) AddPokemons(names []string) core.IPresentOut[T] {
+func (this PokedexController[T]) AddPokemons(player string, names []string) core.IPresentOut[T] {
 	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
 	presenter := this.ListPresenter()
-	useCase.Execute(domain.AddPokemonsQuery{Names: names}, &presenter)
+	useCase.Execute(domain.AddPokemonsQuery{Names: names, Player: player}, &presenter)
 	return presenter
 }
 

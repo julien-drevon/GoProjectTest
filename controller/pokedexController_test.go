@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"errors"
 	"gateway"
 	"pokedex/domain"
 	"testing"
@@ -11,9 +12,9 @@ import (
 func TestGetPokemonIntegration(t *testing.T) {
 	assert := assert.New(t)
 	controller := NewControllerTestWithInit(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})
-	presenter := controller.GetMyPokemons()
+	presenter := controller.GetMyPokemons("sacha")
 
-	expected := "[{\"name\":\"pikatchu\"}]"
+	expected := "{\"Pokemons\":[{\"name\":\"pikatchu\"}],\"Player\":\"sacha\"}"
 	actual, _ := presenter.Print()
 
 	assert.Equal(expected, actual)
@@ -23,10 +24,10 @@ func TestAddWithEmptyName(t *testing.T) {
 	assert := assert.New(t)
 
 	controller := NewControllerTest()
-	presenter := controller.AddPokemons([]string{"pikatchu"})
+	presenter := controller.AddPokemons("", []string{"pikatchu"})
 
 	//expected := "[{\"name\":\"pikatchu\"}]"
-	expected := "name should not be empty"
+	expected := errors.New("Player should not be empty")
 	_, actual := presenter.Print()
 
 	assert.Equal(expected, actual)
@@ -37,10 +38,10 @@ func TestAddAndGetPokemonIntegration(t *testing.T) {
 	assert := assert.New(t)
 	controller := NewControllerTest()
 	//when
-	controller.AddPokemons([]string{"pikatchu"})
-	presenter := controller.GetMyPokemons()
+	controller.AddPokemons("sacha", []string{"pikatchu"})
+	presenter := controller.GetMyPokemons("sacha")
 	//Then
-	expected := "[{\"name\":\"pikatchu\"}]"
+	expected := "{\"Pokemons\":[{\"name\":\"pikatchu\"}],\"Player\":\"sacha\"}"
 	actual, _ := presenter.Print()
 	assert.Equal(expected, actual)
 }
