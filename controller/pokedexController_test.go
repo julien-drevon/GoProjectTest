@@ -27,7 +27,7 @@ func TestAddWithEmptyName(t *testing.T) {
 	presenter := controller.AddPokemons("", []string{"pikatchu"})
 
 	//expected := "[{\"name\":\"pikatchu\"}]"
-	expected := errors.New("Player should not be empty")
+	expected := errors.New("player should not be empty")
 	_, actual := presenter.Print()
 
 	assert.Equal(expected, actual)
@@ -43,6 +43,17 @@ func TestAddAndGetPokemonIntegration(t *testing.T) {
 	//Then
 	expected := "{\"Pokemons\":[{\"name\":\"pikatchu\"}],\"Player\":\"sacha\"}"
 	actual, _ := presenter.Print()
+	assert.Equal(expected, actual)
+}
+func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
+	//Given
+	assert := assert.New(t)
+	controller := NewControllerTest()
+	//when
+	presenter := controller.AddPokemons("", []string{"pikatchu"})
+	//Then
+	expected := errors.New("player should not be empty")
+	_, actual := presenter.Print()
 	assert.Equal(expected, actual)
 }
 
