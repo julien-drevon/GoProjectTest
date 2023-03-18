@@ -5,19 +5,20 @@ import (
 	"clean/core"
 	"controller"
 	"fmt"
+	"gateway"
 	"os"
 	"pokedex/domain"
 	"strings"
 )
 
 type configuration struct {
-	pokemonLi []domain.Pokemon
+	Repo gateway.Repo[domain.Pokemon]
 }
 
 func main() {
 
 	quit := false
-	config := configuration{pokemonLi: make([]domain.Pokemon, 0)}
+	config := configuration{Repo: gateway.NewRepo[domain.Pokemon]()}
 
 	for !quit {
 		reader := bufio.NewReader(os.Stdin)
@@ -43,7 +44,7 @@ func ViewPokemon(config configuration) {
 }
 
 func GetPresenter(config configuration) core.IPresentOut[string] {
-	controller := controller.NewControllerJSonAndMemory(config.pokemonLi)
+	controller := controller.NewControllerJSonAndMemory(config.Repo)
 	presenter := controller.GetMyPokemons()
 	return presenter
 }

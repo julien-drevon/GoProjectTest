@@ -6,7 +6,7 @@ type AddPokemonInPokedex struct {
 	IAddPokemon
 }
 
-func (useCase AddPokemonInPokedex) Execute(query AddPokemonQuery, presenter core.IPresentIn[core.PaginationResult[Pokemon]]) {
+func (useCase *AddPokemonInPokedex) Execute(query AddPokemonQuery, presenter core.IPresentIn[core.PaginationResult[Pokemon]]) {
 	pokemons, err := Add(useCase.IAddPokemon, query)
 	presenter.Present(pokemons, err)
 }
