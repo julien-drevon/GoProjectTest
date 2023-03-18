@@ -1,10 +1,6 @@
 package controller
 
 import (
-	//"clean/core"
-	// "pokedex/domain"
-	// "presenter"
-
 	"gateway"
 	"pokedex/domain"
 	"testing"
@@ -12,11 +8,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//	func GetDebile() core.PaginationResult[domain.Pokemon] {
-//		return core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}, 2, 1, 0)
-//	}
-//
-// []domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}
 func TestGetPokemonIntegration(t *testing.T) {
 	assert := assert.New(t)
 	controller := NewControllerTestWithInit([]domain.Pokemon{{Name: "pikatchu"}})
@@ -57,6 +48,7 @@ func NewControllerTest() PokedexController[string] {
 	repo := gateway.Repo[domain.Pokemon]{Context: []domain.Pokemon{}}
 	return NewControllerJSonAndMemory(repo)
 }
+
 func NewControllerTestWithInit(buf []domain.Pokemon) PokedexController[string] {
 	repo := gateway.Repo[domain.Pokemon]{Context: buf}
 	return NewControllerJSonAndMemory(repo)

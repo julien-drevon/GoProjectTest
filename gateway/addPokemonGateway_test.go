@@ -1,20 +1,12 @@
 package gateway
 
 import (
-	//"clean/core"
-	// "pokedex/domain"
-	// "presenter"
-
 	"clean/core"
 	"pokedex/domain"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
-
-// func GetDebile() core.PaginationResult[domain.Pokemon] {
-// 	return core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}, 2, 1, 0)
-// }
 
 func Test2AddPokemonMemory(t *testing.T) {
 	assert := assert.New(t)

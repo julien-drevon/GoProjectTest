@@ -16,9 +16,12 @@ type configuration struct {
 }
 
 func main() {
+	config := configuration{Repo: gateway.NewRepoWithContext([]domain.Pokemon{{Name: "Pikatch"}})}
+	Start(config)
+}
 
+func Start(config configuration) {
 	quit := false
-	config := configuration{Repo: gateway.NewRepo[domain.Pokemon]()}
 
 	for !quit {
 		reader := bufio.NewReader(os.Stdin)
@@ -31,9 +34,9 @@ func main() {
 			ViewPokemon(config)
 		default:
 		}
-
 	}
 }
+
 func AddPokemon() {
 	fmt.Println("unimplemented")
 }
