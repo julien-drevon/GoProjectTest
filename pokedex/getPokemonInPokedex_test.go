@@ -22,7 +22,7 @@ func Test_GetAllMyPokemon(t *testing.T) {
 	presenter := &core.SimplePresenter[PokemonsPlayer]{}
 	useCase.Execute(query, presenter)
 
-	expected := core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 2, 1, 0)
+	expected := PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}
 	actual, _ := presenter.Print()
 
 	assert.Equal(expected, actual)

@@ -17,13 +17,13 @@ func (service GetAllPokemonsReferentielStub) GetPokedex(query GetPokemonQuery) (
 func Test_GetAllPokemonsReferentiel(t *testing.T) {
 	assert := assert.New(t)
 
-	query := GetPokemonQuery{}
+	query := GetPokemonQuery{Player: "sacha"}
 	useCase := GetPokemonReferentiel{IGetPokedex: GetAllPokemonsReferentielStub{}}
 	presenter := &core.SimplePresenter[PokemonsPlayer]{}
 	useCase.Execute(query, presenter)
 
 	actual, _ := presenter.Print()
-	expected := core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 2, 1, 0)
+	expected := PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}
 
 	assert.Equal(expected, actual)
 }
