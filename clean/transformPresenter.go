@@ -34,3 +34,8 @@ func (presenter TransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error)
 
 	return ConvertData(presenter.Converter, presenter.Result)
 }
+
+func (this *TransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformePresenter(err error) {
+	var zeroVal TDataIn
+	this.Present(zeroVal, err)
+}

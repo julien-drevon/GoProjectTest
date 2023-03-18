@@ -27,17 +27,12 @@ func (this PokedexController[T]) AddPokemons(player string, names []string) core
 	query, err := domain.CreatePokemonAddQuery(player, names)
 
 	if err != nil {
-		this.PokemonPlayerErrorPresenter(&presenter, err)
+		presenter.ZeroValueErrorTransformePresenter(err)
 	} else {
 		useCase.Execute(query, &presenter)
 	}
 
 	return presenter
-}
-
-func (this PokedexController[T]) PokemonPlayerErrorPresenter(presenter core.IPresentIn[domain.PokemonsPlayer], err error) {
-	var zeroVal domain.PokemonsPlayer
-	presenter.Present(zeroVal, err)
 }
 
 func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {

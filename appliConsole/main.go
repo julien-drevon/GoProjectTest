@@ -12,11 +12,11 @@ import (
 )
 
 type configuration struct {
-	Repo gateway.Repo[domain.Pokemon]
+	Repo gateway.Repo
 }
 
 func main() {
-	config := configuration{Repo: gateway.NewRepoWithContext([]domain.Pokemon{{Name: "Pikatch"}})}
+	config := configuration{Repo: gateway.NewRepoWithContext(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})}
 	Start(config)
 }
 
@@ -48,7 +48,7 @@ func ViewPokemon(config configuration) {
 
 func GetPresenter(config configuration) core.IPresentOut[string] {
 	controller := controller.NewControllerJSonAndMemory(config.Repo)
-	presenter := controller.GetMyPokemons()
+	presenter := controller.GetMyPokemons("sacha")
 	return presenter
 }
 
