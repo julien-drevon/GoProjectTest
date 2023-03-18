@@ -6,9 +6,10 @@ import (
 )
 
 type GetAllMyPokemonGateway struct {
-	PokeList []domain.Pokemon
+	Context *Repo[domain.Pokemon]
 }
 
 func (this GetAllMyPokemonGateway) Get(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
-	return core.NewPaginationResult(this.PokeList, len(this.PokeList), 1, 0), nil
+	pokeList := this.Context.Get()
+	return core.NewPaginationResult(pokeList, len(pokeList), 1, 0), nil
 }
