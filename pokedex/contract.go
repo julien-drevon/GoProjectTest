@@ -1,13 +1,11 @@
 package domain
 
-import "clean/core"
-
 type IAddPokemon interface {
-	Add(AddPokemonQuery) (core.PaginationResult[Pokemon], error)
+	Add(AddPokemonsQuery) (PokemonsPlayer, error)
 }
 type IGetPokedemon interface {
-	Get(GetPokemonQuery) (core.PaginationResult[Pokemon], error)
+	Get(GetPokemonQuery) (PokemonsPlayer, error)
 }
 type IGetPokedex interface {
-	GetPokedex(GetPokemonQuery) (core.PaginationResult[Pokemon], error)
+	GetPokedex(GetPokemonQuery) (PokemonsPlayer, error)
 }

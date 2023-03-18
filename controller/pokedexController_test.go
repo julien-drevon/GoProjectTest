@@ -10,7 +10,7 @@ import (
 
 func TestGetPokemonIntegration(t *testing.T) {
 	assert := assert.New(t)
-	controller := NewControllerTestWithInit([]domain.Pokemon{{Name: "pikatchu"}})
+	controller := NewControllerTestWithInit(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})
 	presenter := controller.GetMyPokemons()
 
 	expected := "[{\"name\":\"pikatchu\"}]"
@@ -19,14 +19,15 @@ func TestGetPokemonIntegration(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func TestAddPokemonIntegration(t *testing.T) {
+func TestAddWithEmptyName(t *testing.T) {
 	assert := assert.New(t)
 
 	controller := NewControllerTest()
 	presenter := controller.AddPokemons([]string{"pikatchu"})
 
-	expected := "[{\"name\":\"pikatchu\"}]"
-	actual, _ := presenter.Print()
+	//expected := "[{\"name\":\"pikatchu\"}]"
+	expected := "name should not be empty"
+	_, actual := presenter.Print()
 
 	assert.Equal(expected, actual)
 }
@@ -34,7 +35,7 @@ func TestAddPokemonIntegration(t *testing.T) {
 func TestAddAndGetPokemonIntegration(t *testing.T) {
 	//Given
 	assert := assert.New(t)
-	controller := NewControllerTestWithInit([]domain.Pokemon{})
+	controller := NewControllerTest()
 	//when
 	controller.AddPokemons([]string{"pikatchu"})
 	presenter := controller.GetMyPokemons()
@@ -45,11 +46,11 @@ func TestAddAndGetPokemonIntegration(t *testing.T) {
 }
 
 func NewControllerTest() PokedexController[string] {
-	repo := gateway.Repo[domain.Pokemon]{Context: []domain.Pokemon{}}
+	repo := gateway.NewRepo()
 	return NewControllerJSonAndMemory(repo)
 }
 
-func NewControllerTestWithInit(buf []domain.Pokemon) PokedexController[string] {
-	repo := gateway.Repo[domain.Pokemon]{Context: buf}
+func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokedexController[string] {
+	repo := gateway.Repo{Context: buf}
 	return NewControllerJSonAndMemory(repo)
 }

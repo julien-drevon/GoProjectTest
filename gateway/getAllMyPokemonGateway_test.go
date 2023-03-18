@@ -1,7 +1,6 @@
 package gateway
 
 import (
-	"clean/core"
 	"pokedex/domain"
 	"testing"
 
@@ -11,11 +10,11 @@ import (
 func Test2GetPokemonMemory(t *testing.T) {
 	assert := assert.New(t)
 
-	repo := Repo[domain.Pokemon]{Context: []domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}}
+	repo := Repo{Context: map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}, {Name: "tortank"}}}}
 
 	service := GetAllMyPokemonGateway{Context: &repo}
-	expected := core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}, 2, 1, 0)
-	actual, _ := service.Get(domain.GetPokemonQuery{})
+	expected := domain.PokemonsPlayer{Pokemons: []domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}, Player: "sacha"}
+	actual, _ := service.Get(domain.GetPokemonQuery{Player: "sacha"})
 
 	assert.Equal(expected, actual)
 }

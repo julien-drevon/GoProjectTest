@@ -8,7 +8,7 @@ import (
 )
 
 type PokedexController[T any] struct {
-	ListPresenter     func() core.TransformPresenter[core.PaginationResult[domain.Pokemon], T]
+	ListPresenter     func() core.TransformPresenter[domain.PokemonsPlayer, T]
 	GetPokemonGateway domain.IGetPokedemon
 	AddPokemonGateway domain.IAddPokemon
 }
@@ -23,13 +23,13 @@ func (this PokedexController[T]) GetMyPokemons() core.IPresentOut[T] {
 func (this PokedexController[T]) AddPokemons(names []string) core.IPresentOut[T] {
 	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
 	presenter := this.ListPresenter()
-	useCase.Execute(domain.AddPokemonQuery{Names: names}, &presenter)
+	useCase.Execute(domain.AddPokemonsQuery{Names: names}, &presenter)
 	return presenter
 }
 
-func NewControllerJSonAndMemory(repo gateway.Repo[domain.Pokemon]) PokedexController[string] {
+func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
 	return PokedexController[string]{
-		ListPresenter:     presenter.NewPokemonListToJsonStringPresenter,
+		ListPresenter:     presenter.NewPokemonPlayerToJsonStringPresenter,
 		GetPokemonGateway: gateway.GetAllMyPokemonGateway{Context: &repo},
 		AddPokemonGateway: gateway.AddPokemonGateway{Context: &repo}}
 }

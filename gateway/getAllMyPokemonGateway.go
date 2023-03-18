@@ -1,15 +1,14 @@
 package gateway
 
 import (
-	"clean/core"
 	"pokedex/domain"
 )
 
 type GetAllMyPokemonGateway struct {
-	Context *Repo[domain.Pokemon]
+	Context *Repo
 }
 
-func (this GetAllMyPokemonGateway) Get(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
-	pokeList := this.Context.Get()
-	return core.NewPaginationResult(pokeList, len(pokeList), 1, 0), nil
+func (this GetAllMyPokemonGateway) Get(query domain.GetPokemonQuery) (domain.PokemonsPlayer, error) {
+	pokeList := this.Context.Get(query.Player, func(p domain.Pokemon) bool { return true })
+	return pokeList, nil
 }

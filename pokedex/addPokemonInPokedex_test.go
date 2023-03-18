@@ -10,20 +10,20 @@ import (
 type AddOnePokemonServiceStub struct {
 }
 
-func (service AddOnePokemonServiceStub) Add(query AddPokemonQuery) (core.PaginationResult[Pokemon], error) {
-	return core.NewPaginationResult([]Pokemon{{Name: "pikatch"}}, 1, 1, 0), nil
+func (service AddOnePokemonServiceStub) Add(query AddPokemonsQuery) (PokemonsPlayer, error) {
+	return PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatch"}}}, nil
 }
 
 func Test_AddOnePokemon(t *testing.T) {
 	assert := assert.New(t)
 
-	query := AddPokemonQuery{Names: []string{"ikatchu"}}
+	query := AddPokemonsQuery{Player: "sacha", Names: []string{"ikatchu"}}
 	useCase := AddPokemonInPokedex{IAddPokemon: AddOnePokemonServiceStub{}}
-	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
+	presenter := &core.SimplePresenter[PokemonsPlayer]{}
 	useCase.Execute(query, presenter)
 
 	actual, _ := presenter.Print()
-	expected := core.NewPaginationResult([]Pokemon{{Name: "pikatch"}}, 1, 1, 0)
+	expected := PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatch"}}}
 
 	assert.Equal(expected, actual)
 }

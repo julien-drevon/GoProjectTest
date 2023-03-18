@@ -10,8 +10,8 @@ import (
 type GetAllMyPokemonStub struct {
 }
 
-func (service GetAllMyPokemonStub) Get(query GetPokemonQuery) (core.PaginationResult[Pokemon], error) {
-	return core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 2, 1, 0), nil
+func (service GetAllMyPokemonStub) Get(query GetPokemonQuery) (PokemonsPlayer, error) {
+	return PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}, nil
 }
 
 func Test_GetAllMyPokemon(t *testing.T) {
@@ -19,7 +19,7 @@ func Test_GetAllMyPokemon(t *testing.T) {
 
 	query := GetPokemonQuery{}
 	useCase := GetPokemonInPokedex{IGetPokedemon: GetAllMyPokemonStub{}}
-	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
+	presenter := &core.SimplePresenter[PokemonsPlayer]{}
 	useCase.Execute(query, presenter)
 
 	expected := core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 2, 1, 0)
