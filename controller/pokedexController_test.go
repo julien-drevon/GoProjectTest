@@ -57,6 +57,18 @@ func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
+func TestGetReferentiel(t *testing.T) {
+	//Given
+	assert := assert.New(t)
+	controller := NewControllerTest()
+	//when
+	presenter := controller.GetReferentiel()
+	//Then
+	expected := "[{\"name\":\"draco feu\"},{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
+	actual, _ := presenter.Print()
+	assert.Equal(expected, actual)
+}
+
 func NewControllerTest() PokedexController[string] {
 	repo := gateway.NewRepo()
 	return NewControllerJSonAndMemory(repo)

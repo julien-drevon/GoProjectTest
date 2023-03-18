@@ -10,8 +10,8 @@ import (
 type GetAllPokemonsReferentielStub struct {
 }
 
-func (service GetAllPokemonsReferentielStub) GetPokedex(query GetPokemonQuery) (PokemonsPlayer, error) {
-	return PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}, nil
+func (service GetAllPokemonsReferentielStub) GetPokedex(query GetPokemonQuery) (core.PaginationResult[Pokemon], error) {
+	return core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 4, 1, 0), nil
 }
 
 func Test_GetAllPokemonsReferentiel(t *testing.T) {
@@ -19,11 +19,11 @@ func Test_GetAllPokemonsReferentiel(t *testing.T) {
 
 	query := GetPokemonQuery{Player: "sacha"}
 	useCase := GetPokemonReferentiel{IGetPokedex: GetAllPokemonsReferentielStub{}}
-	presenter := &core.SimplePresenter[PokemonsPlayer]{}
+	presenter := &core.SimplePresenter[core.PaginationResult[Pokemon]]{}
 	useCase.Execute(query, presenter)
 
 	actual, _ := presenter.Print()
-	expected := PokemonsPlayer{Player: "sacha", Pokemons: []Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}
+	expected := core.NewPaginationResult([]Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 4, 1, 0)
 
 	assert.Equal(expected, actual)
 }
