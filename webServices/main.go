@@ -20,13 +20,17 @@ func main() {
 	router.Run("localhost:8080")
 }
 func referentiel(c *gin.Context) {
-	controller := controller.NewControllerJSonAndMemory(repo)
+	controller := controller.NewReferentielController()
 	presenter := controller.GetReferentiel()
 	result, err := presenter.Print()
 
+	ReturnJSON(c, result, err)
+}
+
+func ReturnJSON[T any](c *gin.Context, data T, err error) {
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, err)
 	} else {
-		c.IndentedJSON(http.StatusOK, result)
+		c.IndentedJSON(http.StatusOK, data)
 	}
 }
