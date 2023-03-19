@@ -10,4 +10,5 @@ type IGetPokedemon interface {
 }
 type IGetPokedex interface {
 	GetPokedex(GetPokemonQuery) (core.PaginationResult[Pokemon], error)
+	IsExist(AddPokemonsQuery) bool
 }

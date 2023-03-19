@@ -51,7 +51,7 @@ func (this PokeController[T]) InitGetMyPokemon() (domain.GetPokemonInPokedex, co
 
 func (this PokeController[T]) InitAddPokemonFunction(player string, names []string) (core.TransformPresenter[domain.PokemonsPlayer, T], domain.AddPokemonInPokedex, domain.AddPokemonsQuery, error) {
 	presenter := this.ListPresenter()
-	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
+	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway, IGetPokedex: this.ReferentielGateway}
 	query, err := domain.CreatePokemonAddQuery(player, names)
 	return presenter, useCase, query, err
 }
