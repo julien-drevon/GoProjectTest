@@ -70,12 +70,12 @@ func TestGetReferentiel(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func NewControllerTest() PokedexController[string] {
+func NewControllerTest() PokeController[string] {
 	repo := gateway.NewRepo()
 	return NewControllerJSonAndMemory(repo)
 }
 
-func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokedexController[string] {
+func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokeController[string] {
 	repo := gateway.Repo{Context: buf}
 	return NewControllerJSonAndMemory(repo)
 }

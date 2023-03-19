@@ -17,7 +17,7 @@ func (service AddOnePokemonServiceStub) Add(query AddPokemonsQuery) (PokemonsPla
 func Test_AddOnePokemon(t *testing.T) {
 	assert := assert.New(t)
 
-	query := AddPokemonsQuery{Player: "sacha", Names: []string{"ikatchu"}}
+	query := AddPokemonsQuery{Player: "sacha", Names: []string{"pikatchu"}}
 	useCase := AddPokemonInPokedex{IAddPokemon: AddOnePokemonServiceStub{}}
 	presenter := &core.SimplePresenter[PokemonsPlayer]{}
 	useCase.Execute(query, presenter)
