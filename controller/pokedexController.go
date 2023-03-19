@@ -16,8 +16,7 @@ type PokedexController[T any] struct {
 }
 
 func (this PokedexController[T]) GetMyPokemons(player string) core.IPresentOut[T] {
-	useCase := domain.GetPokemonInPokedex{IGetPokedemon: this.GetPokemonGateway}
-	presenter := this.ListPresenter()
+	useCase, presenter := this.initGetMyPokemon()
 	useCase.Execute(domain.GetPokemonQuery{Player: player}, &presenter)
 
 	return presenter
@@ -25,9 +24,7 @@ func (this PokedexController[T]) GetMyPokemons(player string) core.IPresentOut[T
 
 func (this PokedexController[T]) AddPokemons(player string, names []string) core.IPresentOut[T] {
 
-	presenter := this.ListPresenter()
-	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
-	query, err := domain.CreatePokemonAddQuery(player, names)
+	presenter, useCase, query, err := this.initAddPokemonFunction(player, names)
 
 	if err != nil {
 		presenter.ZeroValueErrorTransformePresenter(err)
@@ -40,12 +37,30 @@ func (this PokedexController[T]) AddPokemons(player string, names []string) core
 
 func (this PokedexController[T]) GetReferentiel() core.IPresentOut[T] {
 
-	presenter := this.ReferentielPresenter()
-	useCase := domain.GetPokemonReferentiel{IGetPokedex: this.ReferentielGateway}
-	query := domain.GetPokemonQuery{}
+	presenter, useCase, query := this.initGetReferentiel()
 	useCase.Execute(query, &presenter)
 
 	return presenter
+}
+
+func (this PokedexController[T]) initGetMyPokemon() (domain.GetPokemonInPokedex, core.TransformPresenter[domain.PokemonsPlayer, T]) {
+	useCase := domain.GetPokemonInPokedex{IGetPokedemon: this.GetPokemonGateway}
+	presenter := this.ListPresenter()
+	return useCase, presenter
+}
+
+func (this PokedexController[T]) initAddPokemonFunction(player string, names []string) (core.TransformPresenter[domain.PokemonsPlayer, T], domain.AddPokemonInPokedex, domain.AddPokemonsQuery, error) {
+	presenter := this.ListPresenter()
+	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway}
+	query, err := domain.CreatePokemonAddQuery(player, names)
+	return presenter, useCase, query, err
+}
+
+func (this PokedexController[T]) initGetReferentiel() (core.TransformPresenter[core.PaginationResult[domain.Pokemon], T], domain.GetPokemonReferentiel, domain.GetPokemonQuery) {
+	presenter := this.ReferentielPresenter()
+	useCase := domain.GetPokemonReferentiel{IGetPokedex: this.ReferentielGateway}
+	query := domain.GetPokemonQuery{}
+	return presenter, useCase, query
 }
 
 func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
