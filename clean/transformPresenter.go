@@ -7,13 +7,13 @@ import (
 type TransformPresenter[TDataIn any, TDataOut any] struct {
 	Result    TDataIn
 	Err       error
-	Converter IConverting[TDataIn, TDataOut]
+	Converter func(TDataIn) (TDataOut, error) //IConverting[TDataIn, TDataOut]
 }
 
-func ConvertData[TDataIn any, TDataOut any](converter IConverting[TDataIn, TDataOut], data TDataIn) (TDataOut, error) {
+func ConvertData[TDataIn any, TDataOut any](converter func(TDataIn) (TDataOut, error), data TDataIn) (TDataOut, error) {
 
 	if converter != nil {
-		return converter.Convert(data)
+		return converter(data)
 	}
 
 	var zeroValue TDataOut

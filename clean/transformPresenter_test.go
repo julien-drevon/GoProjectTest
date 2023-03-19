@@ -17,7 +17,7 @@ func (converter StringTestConverter) Convert(data string) (string, error) {
 func TestTransformPresenter_Should_PresentStringData_And_PrintStringConvertResult(t *testing.T) {
 	assert := assert.New(t)
 	converter := StringTestConverter{}
-	initialPresenter := TransformPresenter[string, string]{Converter: converter}
+	initialPresenter := TransformPresenter[string, string]{Converter: converter.Convert}
 	var presenterIn IPresentIn[string] = &initialPresenter
 	var presenterOut IPresentOut[string] = &initialPresenter
 	presenterIn.Present("1", nil)
@@ -28,7 +28,7 @@ func TestTransformPresenter_Should_PresentStringData_And_PrintStringConvertResul
 func TestTransformPresenter_Should_Return_Error_If_UsedCaseError(t *testing.T) {
 	assert := assert.New(t)
 	converter := StringTestConverter{}
-	initialPresenter := TransformPresenter[string, string]{Converter: converter}
+	initialPresenter := TransformPresenter[string, string]{Converter: converter.Convert}
 	var presenterIn IPresentIn[string] = &initialPresenter
 	var presenterOut IPresentOut[string] = &initialPresenter
 	presenterIn.Present("1", errors.New("Error !!"))

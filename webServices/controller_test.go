@@ -1,4 +1,4 @@
-package webservices
+package main
 
 import (
 	//"clean/core"

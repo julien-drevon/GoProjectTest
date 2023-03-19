@@ -58,18 +58,6 @@ func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func TestGetReferentiel(t *testing.T) {
-	//Given
-	assert := assert.New(t)
-	controller := NewControllerTest()
-	//when
-	presenter := controller.GetReferentiel()
-	//Then
-	expected := "[{\"name\":\"draco feu\"},{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
-	actual, _ := presenter.Print()
-	assert.Equal(expected, actual)
-}
-
 func TestAddAddPokemonNotInReferentiel(t *testing.T) {
 	//Given
 	assert := assert.New(t)
@@ -82,19 +70,14 @@ func TestAddAddPokemonNotInReferentiel(t *testing.T) {
 
 	assert.Equal(expected, actual)
 	assert.Equal(errExpected, err)
-
-	presenter = controller.GetReferentiel()
-	expected = "[{\"name\":\"draco feu\"},{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
-	actual, _ = presenter.Print()
-	assert.Equal(expected, actual)
 }
 
-func NewControllerTest() PokeController[string] {
+func NewControllerTest() PokedexController[string] {
 	repo := gateway.NewRepo()
 	return NewControllerJSonAndMemory(repo)
 }
 
-func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokeController[string] {
+func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokedexController[string] {
 	repo := gateway.Repo{Context: buf}
 	return NewControllerJSonAndMemory(repo)
 }

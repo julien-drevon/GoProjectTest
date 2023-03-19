@@ -26,18 +26,15 @@ func (converter PokemonPlayerToJsonStringConverter) Convert(data domain.Pokemons
 
 func NewPokemonListToJsonStringPresenter() core.TransformPresenter[core.PaginationResult[domain.Pokemon], string] {
 	return core.TransformPresenter[core.PaginationResult[domain.Pokemon], string]{
-		Converter: PokemonListToJsonStringConverter{},
-	}
+		Converter: PokemonListToJsonStringConverter{}.Convert}
 }
 
 func NewPokemonPlayerToJsonStringPresenter() core.TransformPresenter[domain.PokemonsPlayer, string] {
 	return core.TransformPresenter[domain.PokemonsPlayer, string]{
-		Converter: PokemonPlayerToJsonStringConverter{},
-	}
+		Converter: PokemonPlayerToJsonStringConverter{}.Convert}
 }
 
 func NewPaginedListPokemonToJsonStringPresenter() core.TransformPresenter[domain.PokemonsPlayer, string] {
 	return core.TransformPresenter[domain.PokemonsPlayer, string]{
-		Converter: PokemonPlayerToJsonStringConverter{},
-	}
+		Converter: PokemonPlayerToJsonStringConverter{}.Convert}
 }
