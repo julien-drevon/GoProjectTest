@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetPokemonIntegration(t *testing.T) {
+func TestGetPokemon(t *testing.T) {
 	assert := assert.New(t)
 	controller := NewControllerTestWithInit(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})
 	presenter := controller.GetMyPokemons("sacha")
@@ -33,7 +33,7 @@ func TestAddWithEmptyName(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func TestAddAndGetPokemonIntegration(t *testing.T) {
+func TestAddAndGetPokemon(t *testing.T) {
 	//Given
 	assert := assert.New(t)
 	controller := NewControllerTest()
@@ -45,6 +45,7 @@ func TestAddAndGetPokemonIntegration(t *testing.T) {
 	actual, _ := presenter.Print()
 	assert.Equal(expected, actual)
 }
+
 func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
 	//Given
 	assert := assert.New(t)
@@ -69,12 +70,31 @@ func TestGetReferentiel(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func NewControllerTest() PokedexController[string] {
+func TestAddAddPokemonNotInReferentiel(t *testing.T) {
+	//Given
+	assert := assert.New(t)
+	controller := NewControllerTest()
+	//when
+	presenter := controller.AddPokemons("sacha", []string{"toto"})
+
+	expected, errExpected := "", errors.New("Pokemon Not In Referentiel could not be add")
+	actual, err := presenter.Print()
+
+	assert.Equal(expected, actual)
+	assert.Equal(errExpected, err)
+
+	presenter = controller.GetReferentiel()
+	expected = "[{\"name\":\"draco feu\"},{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
+	actual, _ = presenter.Print()
+	assert.Equal(expected, actual)
+}
+
+func NewControllerTest() PokeController[string] {
 	repo := gateway.NewRepo()
 	return NewControllerJSonAndMemory(repo)
 }
 
-func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokedexController[string] {
+func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokeController[string] {
 	repo := gateway.Repo{Context: buf}
 	return NewControllerJSonAndMemory(repo)
 }
