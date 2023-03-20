@@ -62,5 +62,5 @@ func NewControllerWebMemory(repo gateway.Repo) PokedexController[domain.Pokemons
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
-		ReferentialGateway: gateway.GetPokemonReferentialUnitTestsGateway{}}
+		ReferentialGateway: gateway.GetPokemonReferentialFleGateway{}}
 }
