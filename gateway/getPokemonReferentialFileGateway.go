@@ -70,5 +70,5 @@ func openFileList() (*os.File, error) {
 }
 
 func (this GetPokemonReferentialFleGateway) IsExist(query domain.AddPokemonsQuery) bool {
-	return linq.Any(POKEDEX, func(x domain.Pokemon) bool { return linq.Any(query.Names, func(s string) bool { return s == x.Name }) })
+	return linq.Any(cache, func(x domain.Pokemon) bool { return linq.Any(query.Names, func(s string) bool { return s == x.Name }) })
 }
