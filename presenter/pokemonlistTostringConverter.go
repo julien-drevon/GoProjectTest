@@ -15,6 +15,6 @@ func (converter PokemonListToStringConverter) Convert(data core.PaginationResult
 
 func NewPokemonlistTostringConverterPresenter() core.TransformPresenter[core.PaginationResult[domain.Pokemon], []string] {
 	return core.TransformPresenter[core.PaginationResult[domain.Pokemon], []string]{
-		Converter: PokemonListToStringConverter{},
+		Converter: PokemonListToStringConverter{}.Convert,
 	}
 }

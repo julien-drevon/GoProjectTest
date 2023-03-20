@@ -1,4 +1,4 @@
-package webservices
+package main
 
 // Controller example
 type Controller struct {

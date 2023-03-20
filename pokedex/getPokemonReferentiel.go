@@ -14,7 +14,3 @@ func (this GetPokemonReferentiel) Execute(query GetPokemonQuery, presenter core.
 func (this GetPokemonReferentiel) Get(iGetPokemon IGetPokedex, query GetPokemonQuery) (core.PaginationResult[Pokemon], error) {
 	return iGetPokemon.GetPokedex(query)
 }
-
-// func (this GetPokemonReferentiel) IsExist(query AddPokemonsQuery) bool {
-// 	return this.IGetPokedex.IsExist(query)
-// }
