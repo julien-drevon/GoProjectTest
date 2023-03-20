@@ -13,32 +13,40 @@ import (
 type GetPokemonReferentialFleGateway struct {
 }
 
-// var POKEDEX []domain.Pokemon = []domain.Pokemon{
-// 	{Name: "draco feu"},
-// 	{Name: "pikatchu"},
-// 	{Name: "tortank"},
-// }
+var cache []domain.Pokemon
 
 func (this GetPokemonReferentialFleGateway) GetPokedex(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
-	zeroValue := core.NewPaginationResult([]domain.Pokemon{}, 0, 1, 0)
+	val, err := getCache()
+	return core.NewPaginationResult(val, len(val), 1, 0), err
+}
 
-	jsonFile, errOpenFile := this.openFileList()
+func getCache() ([]domain.Pokemon, error) {
+
+	if cache != nil {
+		return cache, nil
+	}
+
+	zeroValue := []domain.Pokemon{}
+	jsonFile, errOpenFile := openFileList()
+
 	if errOpenFile != nil {
 		return zeroValue, errOpenFile
 	}
 
-	pokeLi, errUn := this.Unserialyze(jsonFile)
+	pokeLi, errUn := Unserialyze(jsonFile)
 	if errUn != nil {
 		return zeroValue, errUn
 	}
+
 	if jsonFile != nil {
 		defer jsonFile.Close()
 	}
 
-	return core.NewPaginationResult(pokeLi, len(pokeLi), 1, 0), nil
+	cache = pokeLi
+	return cache, nil
 }
 
-func (this GetPokemonReferentialFleGateway) Unserialyze(fileStream *os.File) ([]domain.Pokemon, error) {
+func Unserialyze(fileStream *os.File) ([]domain.Pokemon, error) {
 	byteValue, _ := ioutil.ReadAll(fileStream)
 	var result []domain.Pokemon
 
@@ -49,7 +57,7 @@ func (this GetPokemonReferentialFleGateway) Unserialyze(fileStream *os.File) ([]
 	return result, err
 }
 
-func (this GetPokemonReferentialFleGateway) openFileList() (*os.File, error) {
+func openFileList() (*os.File, error) {
 	jsonFile, err := os.Open("pokemons.json")
 
 	if err != nil {
@@ -57,7 +65,7 @@ func (this GetPokemonReferentialFleGateway) openFileList() (*os.File, error) {
 		err = errors.Join(errors.New("json file opening errror. "), err)
 		return defaultFileValue, err
 	}
-	//defer jsonFile.Close()
+
 	return jsonFile, nil
 }
 
