@@ -7,37 +7,37 @@ import (
 	"presenter"
 )
 
-type PokemonReferentielController[T any] struct {
-	ReferentielPresenter func() core.TransformPresenter[core.PaginationResult[domain.Pokemon], T]
-	ReferentielGateway   domain.IGetPokedex
+type PokemonReferentialController[T any] struct {
+	ReferentialPresenter func() core.TransformPresenter[core.PaginationResult[domain.Pokemon], T]
+	ReferentialGateway   domain.IGetPokedex
 }
 
-func (this PokemonReferentielController[T]) GetReferentiel() core.IPresentOut[T] {
+func (this PokemonReferentialController[T]) GetReferential() core.IPresentOut[T] {
 
-	presenter, useCase, query := this.InitGetReferentiel()
+	presenter, useCase, query := this.InitGetReferential()
 	useCase.Execute(query, &presenter)
 
 	return presenter
 }
 
-func (this PokemonReferentielController[T]) InitGetReferentiel() (core.TransformPresenter[core.PaginationResult[domain.Pokemon], T], domain.GetPokemonReferentiel, domain.GetPokemonQuery) {
-	presenter := this.ReferentielPresenter()
-	useCase := domain.GetPokemonReferentiel{IGetPokedex: this.ReferentielGateway}
+func (this PokemonReferentialController[T]) InitGetReferential() (core.TransformPresenter[core.PaginationResult[domain.Pokemon], T], domain.GetPokemonReferential, domain.GetPokemonQuery) {
+	presenter := this.ReferentialPresenter()
+	useCase := domain.GetPokemonReferential{IGetPokedex: this.ReferentialGateway}
 	query := domain.GetPokemonQuery{}
 	return presenter, useCase, query
 }
 
-func NewPokemonReferentielControllerJSonAndMemory() PokemonReferentielController[string] {
+func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
 
-	return PokemonReferentielController[string]{
-		ReferentielPresenter: presenter.NewPokemonListToJsonStringPresenter,
-		ReferentielGateway:   gateway.GetPokemonReferentielGateway{}}
+	return PokemonReferentialController[string]{
+		ReferentialPresenter: presenter.NewPokemonListToJsonStringPresenter,
+		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
-func NewReferentielController() PokemonReferentielController[core.PaginationResult[domain.Pokemon]] {
+func NewReferentialController() PokemonReferentialController[core.PaginationResult[domain.Pokemon]] {
 
-	return PokemonReferentielController[core.PaginationResult[domain.Pokemon]]{
+	return PokemonReferentialController[core.PaginationResult[domain.Pokemon]]{
 
-		ReferentielPresenter: presenter.NewPokemonPaginationWebServicePresenter,
-		ReferentielGateway:   gateway.GetPokemonReferentielGateway{}}
+		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
+		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
 }

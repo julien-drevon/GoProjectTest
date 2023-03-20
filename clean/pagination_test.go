@@ -13,7 +13,7 @@ func TestPaginationResult(t *testing.T) {
 	assert.Equal(zeroValue, result.Result)
 }
 
-func TestPaginationResult_New_AssignVlues(t *testing.T) {
+func TestPaginationResult_New_AssignValues(t *testing.T) {
 	assert := assert.New(t)
 	result := NewPaginationResult([]int{1}, 0, 1, 2)
 	want := []int{1}

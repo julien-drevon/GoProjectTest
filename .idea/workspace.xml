@@ -4,14 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc01d8-a81c-4597-99b6-a943c7afce2a" name="Changes" comment="" />
+    <list default="true" id="fbcc01d8-a81c-4597-99b6-a943c7afce2a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clean/asyncTransformPresenter.go" beforeDir="false" afterPath="$PROJECT_DIR$/clean/asyncTransformPresenter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clean/pagination_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/clean/pagination_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clean/transformPresenter.go" beforeDir="false" afterPath="$PROJECT_DIR$/clean/transformPresenter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/pokeReferentiel_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/pokeReferentiel_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/pokedexController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/pokedexController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/pokemonReferentielController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/pokemonReferentielController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/getPokemonReferentielGateway.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/getPokemonReferentielGateway.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/getPokemonReferentielGateway_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/getPokemonReferentielGateway_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pokedex/getPokemonReferentiel.go" beforeDir="false" afterPath="$PROJECT_DIR$/pokedex/getPokemonReferentiel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webServices/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/webServices/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2N4LlJwlAinFtVK7HnW7XESGDRT" />
   <component name="ProjectViewState">
@@ -22,8 +54,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/drevo/Downloads/go-plugin-231.8109.2.zip",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -34,7 +69,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678918559382</updated>
+      <workItem from="1679302896828" duration="747000" />
+      <workItem from="1679303688844" duration="13000" />
+      <workItem from="1679303737880" duration="693000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

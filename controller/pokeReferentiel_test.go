@@ -6,12 +6,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetReferentiel(t *testing.T) {
+func TestGetReferential(t *testing.T) {
 	//Given
 	assert := assert.New(t)
-	controller := NewPokemonReferentielControllerJSonAndMemory()
+	controller := NewPokemonReferentialForUnitsTests()
 	//when
-	presenter := controller.GetReferentiel()
+	presenter := controller.GetReferential()
 	//Then
 	expected := "[{\"name\":\"draco feu\"},{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
 	actual, _ := presenter.Print()

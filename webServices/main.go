@@ -11,17 +11,16 @@ import (
 var repo = gateway.NewRepo()
 
 func main() {
-	//repo := gateway.NewRepo()
 
 	router := gin.Default()
-	router.GET("/referentiel", referentiel)
+	router.GET("/referential", referential)
 	//router.POST("/albums")
 
 	router.Run("localhost:8080")
 }
-func referentiel(c *gin.Context) {
-	controller := controller.NewReferentielController()
-	presenter := controller.GetReferentiel()
+func referential(c *gin.Context) {
+	controller := controller.NewReferentialController()
+	presenter := controller.GetReferential()
 	result, err := presenter.Print()
 
 	ReturnJSON(c, result, err)
