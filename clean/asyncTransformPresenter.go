@@ -41,7 +41,7 @@ func (presenter AsyncTransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, e
 	return presenter.TransResult, presenter.TransError
 }
 
-func (this *AsyncTransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformePresenter(err error) {
+func (this *AsyncTransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformPresenter(err error) {
 	var zeroVal TDataIn
 	this.Present(zeroVal, err)
 }

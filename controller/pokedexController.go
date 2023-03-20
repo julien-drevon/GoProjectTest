@@ -11,7 +11,7 @@ type PokedexController[T any] struct {
 	ListPresenter      func() core.TransformPresenter[domain.PokemonsPlayer, T]
 	GetPokemonGateway  domain.IGetPokedemon
 	AddPokemonGateway  domain.IAddPokemon
-	ReferentielGateway domain.IGetPokedex
+	ReferentialGateway domain.IGetPokedex
 }
 
 func (this PokedexController[T]) GetMyPokemons(player string) core.IPresentOut[T] {
@@ -26,7 +26,7 @@ func (this PokedexController[T]) AddPokemons(player string, names []string) core
 	presenter, useCase, query, err := this.InitAddPokemonFunction(player, names)
 
 	if err != nil {
-		presenter.ZeroValueErrorTransformePresenter(err)
+		presenter.ZeroValueErrorTransformPresenter(err)
 	} else {
 		useCase.Execute(query, &presenter)
 	}
@@ -42,7 +42,7 @@ func (this PokedexController[T]) InitGetMyPokemon() (domain.GetPokemonInPokedex,
 
 func (this PokedexController[T]) InitAddPokemonFunction(player string, names []string) (core.TransformPresenter[domain.PokemonsPlayer, T], domain.AddPokemonInPokedex, domain.AddPokemonsQuery, error) {
 	presenter := this.ListPresenter()
-	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway, IGetPokedex: this.ReferentielGateway}
+	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway, IGetPokedex: this.ReferentialGateway}
 	query, err := domain.CreatePokemonAddQuery(player, names)
 	return presenter, useCase, query, err
 }
@@ -53,7 +53,7 @@ func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
 		ListPresenter:      presenter.NewPokemonPlayerToJsonStringPresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
-		ReferentielGateway: gateway.GetPokemonReferentielGateway{}}
+		ReferentialGateway: gateway.GetPokemonReferentialGateway{}}
 }
 
 func NewControllerWebMemory(repo gateway.Repo) PokedexController[domain.PokemonsPlayer] {
@@ -62,5 +62,5 @@ func NewControllerWebMemory(repo gateway.Repo) PokedexController[domain.Pokemons
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
-		ReferentielGateway: gateway.GetPokemonReferentielGateway{}}
+		ReferentialGateway: gateway.GetPokemonReferentialGateway{}}
 }

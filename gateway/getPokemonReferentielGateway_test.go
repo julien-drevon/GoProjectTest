@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetdPokemonReferentiel(t *testing.T) {
+func TestGetPokemonReferential(t *testing.T) {
 	assert := assert.New(t)
 
-	service := GetPokemonReferentielGateway{}
+	service := GetPokemonReferentialGateway{}
 	expected := core.NewPaginationResult([]domain.Pokemon{{Name: "draco feu"}, {Name: "pikatchu"}, {Name: "tortank"}}, 3, 1, 0)
 	actual, _ := service.GetPokedex(domain.GetPokemonQuery{})
 
