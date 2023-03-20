@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-const POKEMON_NOT_EXIST_NOT_Be_ADDED = "Pokemon Not In Referentiel could not be add"
+const POKEMON_NOT_EXIST_NOT_Be_ADDED = "Pokemon Not In Referential could not be add"
 
 type AddPokemonInPokedex struct {
 	IAddPokemon

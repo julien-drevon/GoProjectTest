@@ -27,11 +27,11 @@ func (this PokemonReferentialController[T]) InitGetReferential() (core.Transform
 	return presenter, useCase, query
 }
 
-func NewPokemonReferentialControllerJSonAndMemory() PokemonReferentialController[string] {
+func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
 
 	return PokemonReferentialController[string]{
 		ReferentialPresenter: presenter.NewPokemonListToJsonStringPresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialGateway{}}
+		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
 func NewReferentialController() PokemonReferentialController[core.PaginationResult[domain.Pokemon]] {
@@ -39,5 +39,5 @@ func NewReferentialController() PokemonReferentialController[core.PaginationResu
 	return PokemonReferentialController[core.PaginationResult[domain.Pokemon]]{
 
 		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialGateway{}}
+		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
 }

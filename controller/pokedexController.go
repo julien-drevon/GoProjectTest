@@ -53,7 +53,7 @@ func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
 		ListPresenter:      presenter.NewPokemonPlayerToJsonStringPresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
-		ReferentialGateway: gateway.GetPokemonReferentialGateway{}}
+		ReferentialGateway: gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
 func NewControllerWebMemory(repo gateway.Repo) PokedexController[domain.PokemonsPlayer] {
@@ -62,5 +62,5 @@ func NewControllerWebMemory(repo gateway.Repo) PokedexController[domain.Pokemons
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
-		ReferentialGateway: gateway.GetPokemonReferentialGateway{}}
+		ReferentialGateway: gateway.GetPokemonReferentialUnitTestsGateway{}}
 }

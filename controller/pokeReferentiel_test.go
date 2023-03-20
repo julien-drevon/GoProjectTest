@@ -9,7 +9,7 @@ import (
 func TestGetReferential(t *testing.T) {
 	//Given
 	assert := assert.New(t)
-	controller := NewPokemonReferentialControllerJSonAndMemory()
+	controller := NewPokemonReferentialForUnitsTests()
 	//when
 	presenter := controller.GetReferential()
 	//Then

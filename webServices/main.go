@@ -11,7 +11,6 @@ import (
 var repo = gateway.NewRepo()
 
 func main() {
-	//repo := gateway.NewRepo()
 
 	router := gin.Default()
 	router.GET("/referential", referential)

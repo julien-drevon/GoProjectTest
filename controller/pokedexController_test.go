@@ -58,14 +58,14 @@ func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func TestAddAddPokemonNotInReferentiel(t *testing.T) {
+func TestAddAddPokemonNotInReferential(t *testing.T) {
 	//Given
 	assert := assert.New(t)
 	controller := NewControllerTest()
 	//when
 	presenter := controller.AddPokemons("sacha", []string{"toto"})
 
-	expected, errExpected := "", errors.New("Pokemon Not In Referentiel could not be add")
+	expected, errExpected := "", errors.New("Pokemon Not In Referential could not be add")
 	actual, err := presenter.Print()
 
 	assert.Equal(expected, actual)
