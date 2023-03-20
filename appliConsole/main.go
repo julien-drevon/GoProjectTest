@@ -16,7 +16,7 @@ type configuration struct {
 }
 
 func main() {
-	config := configuration{Repo: gateway.NewRepoWithContext(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})}
+	config := configuration{Repo: gateway.NewRepoForUnitTestsWithContext(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})}
 	Start(config)
 }
 
@@ -47,7 +47,7 @@ func ViewPokemon(config configuration) {
 }
 
 func GetPresenter(config configuration) core.IPresentOut[string] {
-	controller := controller.NewControllerJSonAndMemory(config.Repo)
+	controller := controller.NewControllerForUnitTests(config.Repo)
 	presenter := controller.GetMyPokemons("sacha")
 	return presenter
 }

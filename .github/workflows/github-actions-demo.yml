@@ -12,7 +12,7 @@ jobs:
           go-version-file: './go.work'
       - run: cd linq && go mod tidy && go test -v
       - run: cd clean && go mod tidy && go test -v          
-      - run: cd pokedex && go mod tidy && go test -v 
+      - run: cd domain && go mod tidy && go test -v 
       - run: cd presenter && go mod tidy && go test -v 
       - run: cd controller && go mod tidy && go test -v        
       - run: cd gateway && go mod tidy && go test -v     

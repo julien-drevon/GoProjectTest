@@ -37,7 +37,6 @@ func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
 func NewReferentialController() PokemonReferentialController[core.PaginationResult[domain.Pokemon]] {
 
 	return PokemonReferentialController[core.PaginationResult[domain.Pokemon]]{
-
 		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
+		ReferentialGateway:   gateway.GetPokemonReferentialFleGateway{}}
 }
