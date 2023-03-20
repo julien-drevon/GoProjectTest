@@ -31,6 +31,9 @@ func (this GetPokemonReferentialFleGateway) GetPokedex(query domain.GetPokemonQu
 	if errUn != nil {
 		return zeroValue, errUn
 	}
+	if jsonFile != nil {
+		defer jsonFile.Close()
+	}
 
 	return core.NewPaginationResult(pokeLi, len(pokeLi), 1, 0), nil
 }
@@ -54,7 +57,7 @@ func (this GetPokemonReferentialFleGateway) openFileList() (*os.File, error) {
 		err = errors.Join(errors.New("json file opening errror. "), err)
 		return defaultFileValue, err
 	}
-	defer jsonFile.Close()
+	//defer jsonFile.Close()
 	return jsonFile, nil
 }
 
