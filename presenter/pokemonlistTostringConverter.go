@@ -9,7 +9,7 @@ import (
 type PokemonListToStringConverter struct {
 }
 
-func (converter PokemonListToStringConverter) Convert(data core.PaginationResult[domain.Pokemon]) ([]string, error) {
+func (this PokemonListToStringConverter) Convert(data core.PaginationResult[domain.Pokemon]) ([]string, error) {
 	return linq.Select(data.Result, func(x domain.Pokemon) string { return x.Name }), nil
 }
 

@@ -8,7 +8,7 @@ import (
 type PokemonPaginationWebServicePresenter struct {
 }
 
-func (converter PokemonPaginationWebServicePresenter) Convert(data core.PaginationResult[domain.Pokemon]) (core.PaginationResult[domain.Pokemon], error) {
+func (this PokemonPaginationWebServicePresenter) Convert(data core.PaginationResult[domain.Pokemon]) (core.PaginationResult[domain.Pokemon], error) {
 	return data, nil
 }
 

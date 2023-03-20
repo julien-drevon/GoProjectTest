@@ -8,7 +8,7 @@ import (
 type PlayerPokemonWebServicePresenter struct {
 }
 
-func (converter PlayerPokemonWebServicePresenter) Convert(data domain.PokemonsPlayer) (domain.PokemonsPlayer, error) {
+func (this PlayerPokemonWebServicePresenter) Convert(data domain.PokemonsPlayer) (domain.PokemonsPlayer, error) {
 	return data, nil
 }
 
