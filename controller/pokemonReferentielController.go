@@ -2,9 +2,7 @@ package controller
 
 import (
 	"clean/core"
-	"gateway"
 	"pokedex/domain"
-	"presenter"
 )
 
 type PokemonReferentialController[T any] struct {
@@ -23,18 +21,4 @@ func (this PokemonReferentialController[T]) InitGetReferential() (core.Transform
 	useCase := domain.GetPokemonReferential{IGetPokedex: this.ReferentialGateway}
 	query := domain.GetPokemonQuery{}
 	return presenter, useCase, query
-}
-
-func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
-
-	return PokemonReferentialController[string]{
-		ReferentialPresenter: presenter.NewPokemonListToJsonStringPresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
-}
-
-func NewReferentialController() PokemonReferentialController[core.PaginationResult[domain.Pokemon]] {
-
-	return PokemonReferentialController[core.PaginationResult[domain.Pokemon]]{
-		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialFileGateway{}}
 }

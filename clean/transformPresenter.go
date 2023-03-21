@@ -20,19 +20,19 @@ func ConvertData[TDataIn any, TDataOut any](converter func(TDataIn) (TDataOut, e
 	return zeroValue, errors.New(CONVERTER_NOT_INJECT_MESSAGE)
 }
 
-func (presenter *TransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err error) {
-	presenter.Result = data
-	presenter.Err = err
+func (this *TransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err error) {
+	this.Result = data
+	this.Err = err
 }
 
-func (presenter TransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error) {
+func (this TransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error) {
 
-	if presenter.Err != nil {
+	if this.Err != nil {
 		var zeroval TDataOut
-		return zeroval, presenter.Err
+		return zeroval, this.Err
 	}
 
-	return ConvertData(presenter.Converter, presenter.Result)
+	return ConvertData(this.Converter, this.Result)
 }
 
 func (this *TransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformPresenter(err error) {

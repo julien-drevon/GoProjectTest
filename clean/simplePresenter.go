@@ -5,11 +5,11 @@ type SimplePresenter[TData any] struct {
 	Err    error
 }
 
-func (presenter *SimplePresenter[TData]) Present(data TData, err error) {
-	presenter.Result = data
-	presenter.Err = err
+func (this *SimplePresenter[TData]) Present(data TData, err error) {
+	this.Result = data
+	this.Err = err
 }
 
-func (presenter SimplePresenter[TData]) Print() (TData, error) {
-	return presenter.Result, presenter.Err
+func (this SimplePresenter[TData]) Print() (TData, error) {
+	return this.Result, this.Err
 }

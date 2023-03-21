@@ -2,9 +2,7 @@ package controller
 
 import (
 	"clean/core"
-	"gateway"
 	"pokedex/domain"
-	"presenter"
 )
 
 type PokedexController[T any] struct {
@@ -45,20 +43,4 @@ func (this PokedexController[T]) InitAddPokemonFunction(player string, names []s
 	useCase := domain.AddPokemonInPokedex{IAddPokemon: this.AddPokemonGateway, IGetPokedex: this.ReferentialGateway}
 	query, err := domain.CreatePokemonAddQuery(player, names)
 	return presenter, useCase, query, err
-}
-
-func NewControllerForUnitTests(repo *gateway.Repo) PokedexController[string] {
-	return PokedexController[string]{
-		ListPresenter:      presenter.NewPokemonPlayerToJsonStringPresenter,
-		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
-		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
-		ReferentialGateway: gateway.GetPokemonReferentialUnitTestsGateway{}}
-}
-
-func NewControllerFileWeb(repo *gateway.Repo) PokedexController[domain.PokemonsPlayer] {
-	return PokedexController[domain.PokemonsPlayer]{
-		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
-		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
-		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
-		ReferentialGateway: gateway.GetPokemonReferentialFileGateway{}}
 }
