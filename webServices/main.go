@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var repo = gateway.NewRepoForWithPersistance()
+var repo, _ = gateway.NewRepoForWithPersistance("pokedex.json")
 
 func main() {
 

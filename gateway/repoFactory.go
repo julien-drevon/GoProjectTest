@@ -1,41 +1,38 @@
 package gateway
 
 import (
-	"encoding/gob"
-	"os"
+	"clean/core"
+	"encoding/json"
+	"io/ioutil"
 	"pokedex/domain"
 )
 
 func NewRepoForUnitTests() Repo {
-	return Repo{Context: make(map[string][]domain.Pokemon), PersistFile: true}
+	return Repo{Context: make(map[string][]domain.Pokemon), PersistFile: false}
 }
 
-func NewRepoForUnitTestsWithContext(context map[string][]domain.Pokemon) Repo {
-	return Repo{Context: context, PersistFile: true}
-}
+func NewRepoForWithPersistance(path string) (Repo, error) {
+	var context map[string][]domain.Pokemon = make(map[string][]domain.Pokemon)
+	var err error
 
-func NewRepoForWithPersistance() Repo {
-	var data map[string][]domain.Pokemon
-	dataFile, err := openPersistanceFile()
-	DeserializePersistanceFile(err, data, dataFile)
+	if core.IsExistFile(path) {
+		context, err = UnserialyzeFile[map[string][]domain.Pokemon](path)
 
-	return Repo{Context: data, PersistFile: true}
-}
-
-func DeserializePersistanceFile(err error, data map[string][]domain.Pokemon, dataFile *os.File) {
-	dataDecoder := gob.NewDecoder(dataFile)
-	err = dataDecoder.Decode(&data)
-	if err != nil {
-		os.Exit(1)
-	}
-	dataFile.Close()
-}
-
-func openPersistanceFile() (*os.File, error) {
-	dataFile, err := os.Open(pathOfPersistanceFile)
-	if err != nil {
-		os.Exit(1)
 	}
 
-	return dataFile, err
+	return Repo{Context: context, PersistFile: true, Path: path}, err
+}
+
+func UnserialyzeFile[T any](path string) (T, error) {
+	//if core.IsExistFile(path) {
+	var context T
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return context, err
+	}
+	err = json.Unmarshal(data, &context)
+
+	return context, err
+
+	//}
 }

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"gateway"
 	"os"
-	"pokedex/domain"
 	"strings"
 )
 
@@ -16,7 +15,8 @@ type configuration struct {
 }
 
 func main() {
-	config := configuration{Repo: gateway.NewRepoForUnitTestsWithContext(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})}
+	repo, _ := gateway.NewRepoForWithPersistance("pokedex1.json")
+	config := configuration{Repo: repo}
 	Start(config)
 }
 
