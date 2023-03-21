@@ -14,11 +14,11 @@ type GetPokemonReferentialFileGateway struct {
 }
 
 func (this GetPokemonReferentialFileGateway) GetPokedex(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
-	val, err := getCache()
+	val, err := GetCache()
 	return core.NewPaginationResult(val, len(val), 1, 0), err
 }
 
-func getCache() ([]domain.Pokemon, error) {
+func GetCache() ([]domain.Pokemon, error) {
 	path := PATH_POKEMONREFERENTIEL_FILE
 	if POKEMONREFERENTIEL_CACHE == nil {
 		zeroValue := []domain.Pokemon{}
