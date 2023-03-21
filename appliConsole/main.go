@@ -16,11 +16,11 @@ type configuration struct {
 
 func main() {
 	repo, _ := gateway.NewRepoForWithPersistance("pokedex1.json")
-	config := configuration{Repo: repo}
+	config := &configuration{Repo: repo}
 	Start(config)
 }
 
-func Start(config configuration) {
+func Start(config *configuration) {
 	quit := false
 
 	for !quit {
@@ -41,13 +41,13 @@ func AddPokemon() {
 	fmt.Println("unimplemented")
 }
 
-func ViewPokemon(config configuration) {
+func ViewPokemon(config *configuration) {
 	str, _ := GetPresenter(config).Print()
 	fmt.Println(str)
 }
 
-func GetPresenter(config configuration) core.IPresentOut[string] {
-	controller := controller.NewControllerForUnitTests(config.Repo)
+func GetPresenter(config *configuration) core.IPresentOut[string] {
+	controller := controller.NewControllerForUnitTests(&config.Repo)
 	presenter := controller.GetMyPokemons("sacha")
 	return presenter
 }
