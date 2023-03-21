@@ -22,7 +22,7 @@ func SerializeFile[T any](path string, context T) error {
 
 func IsExistFile(path string) bool {
 	fs, _ := os.Stat(path)
-	return fs != nil && !fs.IsDir() //os.IsExist(error)
+	return fs != nil && !fs.IsDir()
 }
 
 func UnserialyzeFile[T any](path string) (T, error) {
@@ -36,7 +36,6 @@ func UnserialyzeFile[T any](path string) (T, error) {
 		err = json.Unmarshal(data, &context)
 
 		return context, err
-
 	}
 	return context, errors.New("File" + path + " not exist")
 }

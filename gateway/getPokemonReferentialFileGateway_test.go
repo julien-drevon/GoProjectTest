@@ -16,6 +16,7 @@ func TestGetPokemonReferentialFile(t *testing.T) {
 	assert.Equal(nil, err)
 	assert.Equal(expected, actual.Pagination.Total)
 }
+
 func Test_IsAny_GetPokemonReferentialFile(t *testing.T) {
 	assert := assert.New(t)
 
