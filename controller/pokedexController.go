@@ -47,7 +47,7 @@ func (this PokedexController[T]) InitAddPokemonFunction(player string, names []s
 	return presenter, useCase, query, err
 }
 
-func NewControllerJSonAndMemory(repo gateway.Repo) PokedexController[string] {
+func NewControllerForUnitTests(repo gateway.Repo) PokedexController[string] {
 
 	return PokedexController[string]{
 		ListPresenter:      presenter.NewPokemonPlayerToJsonStringPresenter,

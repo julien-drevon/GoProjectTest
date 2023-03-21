@@ -6,7 +6,7 @@ use (
 	./controller
 	./gateway
 	./linq
-	./pokedex
+	./domain
 	./presenter
 	./webServices
 )

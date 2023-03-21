@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var repo = gateway.NewRepo()
+var repo, _ = gateway.NewRepoForWithPersistance("pokedex.json")
 
 func main() {
 
@@ -18,6 +18,7 @@ func main() {
 
 	router.Run("localhost:8080")
 }
+
 func referential(c *gin.Context) {
 	controller := controller.NewReferentialController()
 	presenter := controller.GetReferential()

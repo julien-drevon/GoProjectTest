@@ -9,7 +9,7 @@ import (
 
 func Test2AddPokemonMemory(t *testing.T) {
 	assert := assert.New(t)
-	repo := NewRepo()
+	repo := NewRepoForUnitTests()
 	service := AddPokemonGateway{Context: &repo}
 	expected := domain.PokemonsPlayer{Player: "sacha", Pokemons: []domain.Pokemon{{Name: "pikatchu"}, {Name: "tortank"}}}
 	actual, _ := service.Add(domain.AddPokemonsQuery{Player: "sacha", Names: []string{"pikatchu", "tortank"}})

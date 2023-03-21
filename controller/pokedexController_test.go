@@ -73,11 +73,11 @@ func TestAddAddPokemonNotInReferential(t *testing.T) {
 }
 
 func NewControllerTest() PokedexController[string] {
-	repo := gateway.NewRepo()
-	return NewControllerJSonAndMemory(repo)
+	repo := gateway.NewRepoForUnitTests()
+	return NewControllerForUnitTests(repo)
 }
 
 func NewControllerTestWithInit(buf map[string][]domain.Pokemon) PokedexController[string] {
 	repo := gateway.Repo{Context: buf}
-	return NewControllerJSonAndMemory(repo)
+	return NewControllerForUnitTests(repo)
 }

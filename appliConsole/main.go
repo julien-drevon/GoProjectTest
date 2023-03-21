@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"gateway"
 	"os"
-	"pokedex/domain"
 	"strings"
 )
 
@@ -16,7 +15,8 @@ type configuration struct {
 }
 
 func main() {
-	config := configuration{Repo: gateway.NewRepoWithContext(map[string][]domain.Pokemon{"sacha": {{Name: "pikatchu"}}})}
+	repo, _ := gateway.NewRepoForWithPersistance("pokedex1.json")
+	config := configuration{Repo: repo}
 	Start(config)
 }
 
@@ -47,7 +47,7 @@ func ViewPokemon(config configuration) {
 }
 
 func GetPresenter(config configuration) core.IPresentOut[string] {
-	controller := controller.NewControllerJSonAndMemory(config.Repo)
+	controller := controller.NewControllerForUnitTests(config.Repo)
 	presenter := controller.GetMyPokemons("sacha")
 	return presenter
 }
