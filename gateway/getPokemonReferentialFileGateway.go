@@ -6,14 +6,14 @@ import (
 	"pokedex/domain"
 )
 
-type GetPokemonReferentialFleGateway struct {
-}
-
 var POKEMONREFERENTIEL_CACHE []domain.Pokemon
 
 const PATH_POKEMONREFERENTIEL_FILE = "pokemons.json"
 
-func (this GetPokemonReferentialFleGateway) GetPokedex(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
+type GetPokemonReferentialFileGateway struct {
+}
+
+func (this GetPokemonReferentialFileGateway) GetPokedex(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
 	val, err := getCache()
 	return core.NewPaginationResult(val, len(val), 1, 0), err
 }
@@ -31,6 +31,6 @@ func getCache() ([]domain.Pokemon, error) {
 	return POKEMONREFERENTIEL_CACHE, nil
 }
 
-func (this GetPokemonReferentialFleGateway) IsExist(query domain.AddPokemonsQuery) bool {
+func (this GetPokemonReferentialFileGateway) IsExist(query domain.AddPokemonsQuery) bool {
 	return linq.Any(POKEMONREFERENTIEL_CACHE, func(x domain.Pokemon) bool { return linq.Any(query.Names, func(s string) bool { return s == x.Name }) })
 }

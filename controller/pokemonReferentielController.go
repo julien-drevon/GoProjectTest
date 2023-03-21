@@ -38,5 +38,5 @@ func NewReferentialController() PokemonReferentialController[core.PaginationResu
 
 	return PokemonReferentialController[core.PaginationResult[domain.Pokemon]]{
 		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialFleGateway{}}
+		ReferentialGateway:   gateway.GetPokemonReferentialFileGateway{}}
 }
