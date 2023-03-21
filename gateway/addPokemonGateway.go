@@ -16,6 +16,7 @@ func (this AddPokemonGateway) Add(query domain.AddPokemonsQuery) (domain.Pokemon
 
 	return domain.PokemonsPlayer{Player: query.Player, Pokemons: pokeSelect}, nil
 }
+
 func TransformQueryToPokemon(query domain.AddPokemonsQuery) []domain.Pokemon {
 	return linq.Select(query.Names, func(x string) domain.Pokemon { return domain.Pokemon{Name: x} })
 }
