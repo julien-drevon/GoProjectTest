@@ -13,7 +13,7 @@ func TestRepoSaveInFile(t *testing.T) {
 
 	path := "TestRepoSaveInFilePokedex.json"
 	assert := assert.New(t)
-	DeleteFile(path)
+	DeleteRepoTestFile(path)
 
 	repo, err := NewRepoForWithPersistance(path)
 	assert.Equal(nil, err)
@@ -32,10 +32,10 @@ func TestRepoSaveInFile(t *testing.T) {
 	actual = repo.Get("sacha", func(x domain.Pokemon) bool { return true })
 	assert.Equal(expected, actual)
 
-	DeleteFile(path)
+	DeleteRepoTestFile(path)
 }
 
-func DeleteFile(path string) {
+func DeleteRepoTestFile(path string) {
 
 	if core.IsExistFile(path) {
 		os.Remove(path)
