@@ -13,10 +13,8 @@ type PokemonReferentialController[T any] struct {
 }
 
 func (this PokemonReferentialController[T]) GetReferential() core.IPresentOut[T] {
-
 	presenter, useCase, query := this.InitGetReferential()
 	useCase.Execute(query, &presenter)
-
 	return presenter
 }
 
