@@ -25,20 +25,20 @@ func ConvertDataAsync[TDataIn any, TDataOut any](converter IAsyncConverting[TDat
 	return zeroValue, errors.New(CONVERTER_NOT_INJECT_MESSAGE)
 }
 
-func (presenter *AsyncTransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err error) {
-	presenter.Result = data
-	presenter.Err = err
-	presenter.TransResult, presenter.TransError = ConvertDataAsync(presenter.Converter, presenter.Result)
+func (this *AsyncTransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err error) {
+	this.Result = data
+	this.Err = err
+	this.TransResult, this.TransError = ConvertDataAsync(this.Converter, this.Result)
 }
 
-func (presenter AsyncTransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error) {
+func (this AsyncTransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error) {
 
-	if presenter.Err != nil {
+	if this.Err != nil {
 		var zeroval TDataOut
-		return zeroval, presenter.Err
+		return zeroval, this.Err
 	}
 
-	return presenter.TransResult, presenter.TransError
+	return this.TransResult, this.TransError
 }
 
 func (this *AsyncTransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformPresenter(err error) {
