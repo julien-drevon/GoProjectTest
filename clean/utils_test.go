@@ -11,7 +11,6 @@ func Test_IsExistFile_ShouyldBeTrue(t *testing.T) {
 	assert := assert.New(t)
 
 	assert.Equal(IsExistFile("utils.go"), true)
-
 }
 
 func Test_IsExistFile_ShouyldBeFalse(t *testing.T) {
