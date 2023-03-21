@@ -47,20 +47,20 @@ func (this PokedexController[T]) InitAddPokemonFunction(player string, names []s
 	return presenter, useCase, query, err
 }
 
-func NewControllerForUnitTests(repo gateway.Repo) PokedexController[string] {
+func NewControllerForUnitTests(repo *gateway.Repo) PokedexController[string] {
 
 	return PokedexController[string]{
 		ListPresenter:      presenter.NewPokemonPlayerToJsonStringPresenter,
-		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
-		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
+		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
+		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
 		ReferentialGateway: gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
-func NewControllerWebMemory(repo gateway.Repo) PokedexController[domain.PokemonsPlayer] {
+func NewControllerWebMemory(repo *gateway.Repo) PokedexController[domain.PokemonsPlayer] {
 
 	return PokedexController[domain.PokemonsPlayer]{
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
-		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: &repo},
-		AddPokemonGateway:  gateway.AddPokemonGateway{Context: &repo},
+		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
+		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
 		ReferentialGateway: gateway.GetPokemonReferentialFileGateway{}}
 }
