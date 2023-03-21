@@ -10,9 +10,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version-file: './go.work'
-      - run: go mod download
-      - run: cd linq && go mod tidy 
-      - run: cd linq && go test -v
+      - run: cd linq && go mod tidy && go test -v
       - run: cd clean && go test -v          
       - run: cd domain  && go test -v 
       - run: cd presenter  && go test -v 
