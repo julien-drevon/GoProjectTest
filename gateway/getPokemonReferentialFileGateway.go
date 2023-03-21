@@ -22,7 +22,7 @@ func (this GetPokemonReferentialFileGateway) GetCache() ([]domain.Pokemon, error
 	path := PATH_POKEMONREFERENTIEL_FILE
 	if POKEMONREFERENTIEL_CACHE == nil {
 		zeroValue := []domain.Pokemon{}
-		pokeLi, errUn := core.UnserialyzeFile[[]domain.Pokemon](path)
+		pokeLi, errUn := core.UnserializeFile[[]domain.Pokemon](path)
 		if errUn != nil {
 			return zeroValue, errUn
 		}

@@ -3,7 +3,6 @@ package core
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"os"
 )
 
@@ -12,7 +11,10 @@ func SerializeFile[T any](path string, context T) error {
 	if err != nil {
 		return err
 	}
-	ser3, _ := json.Marshal(context)
+	ser3, err := json.Marshal(context)
+	if err != nil {
+		return err
+	}
 	dataFile.Write(ser3)
 	if err != nil {
 		return err
@@ -25,11 +27,11 @@ func IsExistFile(path string) bool {
 	return fs != nil && !fs.IsDir()
 }
 
-func UnserialyzeFile[T any](path string) (T, error) {
+func UnserializeFile[T any](path string) (T, error) {
 	var context T
 	if IsExistFile(path) {
 		var context T
-		data, err := ioutil.ReadFile(path)
+		data, err := os.ReadFile(path)
 		if err != nil {
 			return context, err
 		}

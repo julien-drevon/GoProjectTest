@@ -14,7 +14,7 @@ func NewRepoForWithPersistance(path string) (Repo, error) {
 	var err error
 
 	if core.IsExistFile(path) {
-		context, err = core.UnserialyzeFile[map[string][]domain.Pokemon](path)
+		context, err = core.UnserializeFile[map[string][]domain.Pokemon](path)
 	}
 
 	return Repo{Context: context, PersistFile: true, Path: path}, err
