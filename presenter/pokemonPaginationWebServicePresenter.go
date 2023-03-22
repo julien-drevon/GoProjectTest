@@ -8,14 +8,19 @@ import (
 
 type PokemonPaginationHttpResult struct {
 	Data   core.PaginationResult[domain.Pokemon]
-	STATUS int
+	Status int
+	Error  string
 }
 
 type PokemonPaginationWebServicePresenter struct {
 }
 
 func (this PokemonPaginationWebServicePresenter) Convert(data core.PaginationResult[domain.Pokemon], err error) (PokemonPaginationHttpResult, error) {
-	return PokemonPaginationHttpResult{Data: data, STATUS: http.StatusOK}, err
+	if err != nil {
+		return PokemonPaginationHttpResult{Data: core.PaginationResult[domain.Pokemon]{}, Status: http.StatusBadRequest, Error: err.Error()}, nil
+	}
+
+	return PokemonPaginationHttpResult{Data: data, Status: http.StatusOK}, err
 }
 
 // domain.PokemonsPlayer
