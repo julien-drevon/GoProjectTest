@@ -14,6 +14,7 @@ func Mapper[T any](initialValue T, conversion func(T) (T, error)) (T, error) {
 	if err != nil {
 		return val, NewMappingError("")
 	}
+
 	return val, err
 }
 
@@ -34,6 +35,7 @@ func NewMappingError(err string) error {
 	er := MappingError{
 		Message: err,
 	}
+
 	jsonByte, _ := json.Marshal(er)
 	return errors.New(string(jsonByte))
 }

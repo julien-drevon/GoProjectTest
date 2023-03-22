@@ -11,10 +11,10 @@ type PokemonPaginationWebServicePresenter struct {
 
 func (this PokemonPaginationWebServicePresenter) Convert(data core.PaginationResult[domain.Pokemon], err error) (HttpResponse[core.PaginationResult[domain.Pokemon]], error) {
 	if err != nil {
-		return HttpResponse[core.PaginationResult[domain.Pokemon]]{Data: core.PaginationResult[domain.Pokemon]{}, Status: http.StatusBadRequest, Error: err.Error()}, nil
+		return HttpResponse[core.PaginationResult[domain.Pokemon]]{Status: http.StatusBadRequest, Error: err.Error(), Data: core.PaginationResult[domain.Pokemon]{}}, nil
 	}
 
-	return HttpResponse[core.PaginationResult[domain.Pokemon]]{Data: data, Status: http.StatusOK}, err
+	return HttpResponse[core.PaginationResult[domain.Pokemon]]{Status: http.StatusOK, Data: data, Error: ""}, err
 }
 
 // domain.PokemonsPlayer

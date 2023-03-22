@@ -44,3 +44,14 @@ func TestAsyncTransformPresenter_Should_Return_Error_IF_ConverterNotInject(t *te
 	_, err := presenterOut.Print()
 	assert.Equal(err, errors.New("Converter must be inject in TransformerPresenter"))
 }
+func TestAsyncTransformPresenter__Return_ZeroValue(t *testing.T) {
+	assert := assert.New(t)
+
+	var zeroV string
+	initialPresenter := AsyncTransformPresenter[string, string]{Converter: nil}
+
+	initialPresenter.ZeroValueErrorTransformPresenter(errors.New("une erreur"))
+	actual, errActual := initialPresenter.Print()
+	assert.Equal(errors.New("une erreur"), errActual)
+	assert.Equal(zeroV, actual)
+}

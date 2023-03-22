@@ -38,7 +38,13 @@ func referential(controller controller.PokemonReferentialController[presenter.Ht
 
 		IndentedJSON(
 			ginContext,
-			func(c *gin.Context) { c.IndentedJSON(result.Status, result.Data) },
+			func(c *gin.Context) {
+				if result.Error != "" {
+					c.IndentedJSON(result.Status, result.Error)
+				} else {
+					c.IndentedJSON(result.Status, result.Data)
+				}
+			},
 			err)
 	}
 }
