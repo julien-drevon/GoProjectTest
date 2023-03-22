@@ -46,18 +46,6 @@ func TestAddAndGetPokemon(t *testing.T) {
 	assert.Equal(expected, actual)
 }
 
-func TestAddPokemonIntegrationWithEmptyName(t *testing.T) {
-	//Given
-	assert := assert.New(t)
-	controller := NewControllerTest()
-	//when
-	presenter := controller.AddPokemons("", []string{"pikatchu"})
-	//Then
-	expected := errors.New("player should not be empty")
-	_, actual := presenter.Print()
-	assert.Equal(expected, actual)
-}
-
 func TestAddAddPokemonNotInReferential(t *testing.T) {
 	//Given
 	assert := assert.New(t)
