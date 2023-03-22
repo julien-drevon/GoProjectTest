@@ -14,7 +14,7 @@ func (this PokemonPaginationWebServicePresenter) Convert(data core.PaginationRes
 		return HttpResponse[core.PaginationResult[domain.Pokemon]]{Status: http.StatusBadRequest, Error: err.Error(), Data: core.PaginationResult[domain.Pokemon]{}}, nil
 	}
 
-	return HttpResponse[core.PaginationResult[domain.Pokemon]]{Status: http.StatusOK, Data: data, Error: ""}, err
+	return HttpResponse[core.PaginationResult[domain.Pokemon]]{Status: http.StatusOK, Data: data, Error: ""}, nil
 }
 
 // domain.PokemonsPlayer
