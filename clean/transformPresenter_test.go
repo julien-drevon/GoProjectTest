@@ -10,7 +10,11 @@ import (
 type StringTestConverter struct {
 }
 
-func (converter StringTestConverter) Convert(data string) (string, error) {
+func (converter StringTestConverter) Convert(data string, err error) (string, error) {
+	if err != nil {
+		return "", err
+
+	}
 	return data + "1", nil
 }
 

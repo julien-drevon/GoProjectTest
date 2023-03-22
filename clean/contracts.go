@@ -23,7 +23,7 @@ type IProvideDateTime interface {
 }
 
 type IConverting[TDataIn any, TDataOut any] interface {
-	Convert(TDataIn) (TDataOut, error)
+	Convert(TDataIn, error) (TDataOut, error)
 }
 
 type IAsyncConverting[TDataIn any, TDataOut any] interface {

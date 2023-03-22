@@ -14,8 +14,8 @@ type PokemonPaginationHttpResult struct {
 type PokemonPaginationWebServicePresenter struct {
 }
 
-func (this PokemonPaginationWebServicePresenter) Convert(data core.PaginationResult[domain.Pokemon]) (PokemonPaginationHttpResult, error) {
-	return PokemonPaginationHttpResult{Data: data, STATUS: http.StatusOK}, nil
+func (this PokemonPaginationWebServicePresenter) Convert(data core.PaginationResult[domain.Pokemon], err error) (PokemonPaginationHttpResult, error) {
+	return PokemonPaginationHttpResult{Data: data, STATUS: http.StatusOK}, err
 }
 
 // domain.PokemonsPlayer

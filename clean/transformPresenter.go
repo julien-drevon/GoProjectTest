@@ -7,13 +7,13 @@ import (
 type TransformPresenter[TDataIn any, TDataOut any] struct {
 	Result    TDataIn
 	Err       error
-	Converter func(TDataIn) (TDataOut, error)
+	Converter func(TDataIn, error) (TDataOut, error)
 }
 
-func ConvertData[TDataIn any, TDataOut any](converter func(TDataIn) (TDataOut, error), data TDataIn) (TDataOut, error) {
+func ConvertData[TDataIn any, TDataOut any](converter func(TDataIn, error) (TDataOut, error), data TDataIn, err error) (TDataOut, error) {
 
 	if converter != nil {
-		return converter(data)
+		return converter(data, err)
 	}
 
 	var zeroValue TDataOut
@@ -27,12 +27,12 @@ func (this *TransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err err
 
 func (this TransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error) {
 
-	if this.Err != nil {
-		var zeroval TDataOut
-		return zeroval, this.Err
-	}
+	// if this.Err != nil {
+	// 	var zeroval TDataOut
+	// 	return zeroval, this.Err
+	// }
 
-	return ConvertData(this.Converter, this.Result)
+	return ConvertData(this.Converter, this.Result, this.Err)
 }
 
 func (this *TransformPresenter[TDataIn, TDataOut]) ZeroValueErrorTransformPresenter(err error) {

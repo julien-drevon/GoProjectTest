@@ -9,8 +9,8 @@ import (
 type PokemonListToStringConverter struct {
 }
 
-func (this PokemonListToStringConverter) Convert(data core.PaginationResult[domain.Pokemon]) ([]string, error) {
-	return linq.Select(data.Result, func(x domain.Pokemon) string { return x.Name }), nil
+func (this PokemonListToStringConverter) Convert(data core.PaginationResult[domain.Pokemon], err error) ([]string, error) {
+	return linq.Select(data.Result, func(x domain.Pokemon) string { return x.Name }), err
 }
 
 func NewPokemonlistTostringConverterPresenter() core.TransformPresenter[core.PaginationResult[domain.Pokemon], []string] {

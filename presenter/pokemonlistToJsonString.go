@@ -12,13 +12,19 @@ type PokemonListToJsonStringConverter struct {
 type PokemonPlayerToJsonStringConverter struct {
 }
 
-func (this PokemonListToJsonStringConverter) Convert(data core.PaginationResult[domain.Pokemon]) (string, error) {
+func (this PokemonListToJsonStringConverter) Convert(data core.PaginationResult[domain.Pokemon], err error) (string, error) {
+	if err != nil {
+		return "", err
+	}
 	pokeList := data.Result
 	emp3, _ := json.Marshal(pokeList)
 	return string(emp3), nil
 }
 
-func (this PokemonPlayerToJsonStringConverter) Convert(data domain.PokemonsPlayer) (string, error) {
+func (this PokemonPlayerToJsonStringConverter) Convert(data domain.PokemonsPlayer, err error) (string, error) {
+	if err != nil {
+		return "", err
+	}
 	pokeList := data
 	emp3, _ := json.Marshal(pokeList)
 	return string(emp3), nil

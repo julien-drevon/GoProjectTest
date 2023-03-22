@@ -2,6 +2,7 @@ package presenter
 
 import (
 	"clean/core"
+	"errors"
 	"pokedex/domain"
 	"testing"
 
@@ -17,9 +18,13 @@ func TestPokemonListToString(t *testing.T) {
 	converter := PokemonListToStringConverter{}
 
 	expected := []string{"pikatchu", "tortank"}
-	actual, _ := converter.Convert(GetPokelist())
+	actual, _ := converter.Convert(GetPokelist(), nil)
 
 	assert.Equal(expected, actual)
+
+	errExpected := errors.New("")
+	_, errActual := converter.Convert(GetPokelist(), errors.New(""))
+	assert.Equal(errExpected, errActual)
 }
 
 func TestPokemonListToJson(t *testing.T) {
@@ -27,16 +32,24 @@ func TestPokemonListToJson(t *testing.T) {
 	converter := PokemonListToJsonStringConverter{}
 
 	expected := "[{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
-	actual, _ := converter.Convert(GetPokelist())
+	actual, _ := converter.Convert(GetPokelist(), nil)
 
 	assert.Equal(expected, actual)
+
+	errExpected := errors.New("")
+	_, errActual := converter.Convert(GetPokelist(), errors.New(""))
+	assert.Equal(errExpected, errActual)
 }
 func TestPokemonToJson(t *testing.T) {
 	assert := assert.New(t)
 	converter := PokemonListToJsonStringConverter{}
 
 	expected := "[{\"name\":\"pikatchu\"},{\"name\":\"tortank\"}]"
-	actual, _ := converter.Convert(GetPokelist())
+	actual, _ := converter.Convert(GetPokelist(), nil)
 
 	assert.Equal(expected, actual)
+
+	errExpected := errors.New("")
+	_, errActual := converter.Convert(GetPokelist(), errors.New(""))
+	assert.Equal(errExpected, errActual)
 }

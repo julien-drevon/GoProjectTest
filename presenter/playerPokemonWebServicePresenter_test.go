@@ -12,7 +12,7 @@ func TestPokemonPaginationWebServicePresenter(t *testing.T) {
 	converter := PlayerPokemonWebServicePresenter{}
 
 	expected := domain.PokemonsPlayer{Player: "sacha", Pokemons: []domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}
-	actual, _ := converter.Convert(domain.PokemonsPlayer{Player: "sacha", Pokemons: []domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}})
+	actual, _ := converter.Convert(domain.PokemonsPlayer{Player: "sacha", Pokemons: []domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}}, nil)
 
 	assert.Equal(expected, actual)
 }
