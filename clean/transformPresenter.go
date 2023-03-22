@@ -26,12 +26,6 @@ func (this *TransformPresenter[TDataIn, TDataOut]) Present(data TDataIn, err err
 }
 
 func (this TransformPresenter[TDataIn, TDataOut]) Print() (TDataOut, error) {
-
-	// if this.Err != nil {
-	// 	var zeroval TDataOut
-	// 	return zeroval, this.Err
-	// }
-
 	return ConvertData(this.Converter, this.Result, this.Err)
 }
 

@@ -19,6 +19,7 @@ func TestPlayerPokemonWebServicePresenter_ShouldReturn_HttpOk_Struct(t *testing.
 
 	assert.Equal(expected, actual)
 }
+
 func TestPlayerPokemonWebServicePresenter_Should_Return_HttpError_Struc(t *testing.T) {
 	assert := assert.New(t)
 	converter := PokemonPaginationWebServicePresenter{}

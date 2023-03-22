@@ -40,6 +40,7 @@ func TestPokemonListToJson(t *testing.T) {
 	_, errActual := converter.Convert(GetPokelist(), errors.New(""))
 	assert.Equal(errExpected, errActual)
 }
+
 func TestPokemonToJson(t *testing.T) {
 	assert := assert.New(t)
 	converter := PokemonListToJsonStringConverter{}

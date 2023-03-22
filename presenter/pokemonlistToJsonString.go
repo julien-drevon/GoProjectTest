@@ -17,7 +17,10 @@ func (this PokemonListToJsonStringConverter) Convert(data core.PaginationResult[
 		return "", err
 	}
 	pokeList := data.Result
-	emp3, _ := json.Marshal(pokeList)
+	emp3, err := json.Marshal(pokeList)
+	if err != nil {
+		return "", err
+	}
 	return string(emp3), nil
 }
 
@@ -26,7 +29,10 @@ func (this PokemonPlayerToJsonStringConverter) Convert(data domain.PokemonsPlaye
 		return "", err
 	}
 	pokeList := data
-	emp3, _ := json.Marshal(pokeList)
+	emp3, err := json.Marshal(pokeList)
+	if err != nil {
+		return "", err
+	}
 	return string(emp3), nil
 }
 

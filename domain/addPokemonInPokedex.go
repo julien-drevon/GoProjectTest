@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-const POKEMON_NOT_EXIST_NOT_Be_ADDED = "Pokemon Not In Referential could not be add"
+const POKEMON_NOT_EXIST_NOT_BE_ADDED = "Pokemon Not In Referential could not be add"
 
 type AddPokemonInPokedex struct {
 	IAddPokemon
@@ -26,7 +26,7 @@ func (this AddPokemonInPokedex) IsExistPokemon(query AddPokemonsQuery) (bool, er
 		return true, nil
 	}
 
-	return false, errors.New(POKEMON_NOT_EXIST_NOT_Be_ADDED)
+	return false, errors.New(POKEMON_NOT_EXIST_NOT_BE_ADDED)
 }
 
 func (this *AddPokemonInPokedex) Add(query AddPokemonsQuery) (PokemonsPlayer, error) {
