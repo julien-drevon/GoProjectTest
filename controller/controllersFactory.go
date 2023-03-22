@@ -15,8 +15,8 @@ func NewControllerForUnitTests(repo *gateway.Repo) PokedexController[string] {
 		ReferentialGateway: gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
-func NewControllerFileWeb(repo *gateway.Repo) PokedexController[domain.PokemonsPlayer] {
-	return PokedexController[domain.PokemonsPlayer]{
+func NewControllerFileWeb(repo *gateway.Repo) PokedexController[presenter.HttpResponse[domain.PokemonsPlayer]] {
+	return PokedexController[presenter.HttpResponse[domain.PokemonsPlayer]]{
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
