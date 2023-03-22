@@ -27,9 +27,9 @@ func main() {
 	router.Run("localhost:8080")
 }
 
-func referential(controller controller.PokemonReferentialController[presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]]]) gin.HandlerFunc {
+func referential(controller controller.PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]]) gin.HandlerFunc {
 	return func(ginContext *gin.Context) {
-		var resultChan chan presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]] = make(chan presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]])
+		var resultChan chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]] = make(chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]])
 		var errChan chan error = make(chan error)
 
 		go GetReferentialValue(controller, resultChan, errChan)
@@ -43,7 +43,7 @@ func referential(controller controller.PokemonReferentialController[presenter.Po
 	}
 }
 
-func GetReferentialValue(controller controller.PokemonReferentialController[presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]]], stringChan chan presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]], errChan chan error) {
+func GetReferentialValue(controller controller.PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]], stringChan chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], errChan chan error) {
 	presenter := controller.GetReferential()
 	result, err := presenter.Print()
 	stringChan <- result

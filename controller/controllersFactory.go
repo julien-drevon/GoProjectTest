@@ -30,9 +30,9 @@ func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
 		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
-func NewReferentialController() PokemonReferentialController[presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]]] {
+func NewReferentialController() PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]] {
 
-	return PokemonReferentialController[presenter.PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]]]{
+	return PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]]{
 		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
 		ReferentialGateway:   gateway.GetPokemonReferentialFileGateway{}}
 }

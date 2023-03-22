@@ -1,6 +1,6 @@
 package presenter
 
-type PokemonPaginationHttpResult[T any] struct {
+type HttpResponse[T any] struct {
 	Data   T
 	Status int
 	Error  string

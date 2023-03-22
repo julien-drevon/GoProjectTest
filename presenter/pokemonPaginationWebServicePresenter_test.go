@@ -14,7 +14,7 @@ func TestPlayerPokemonWebServicePresenter_ShouldReturn_HttpOk_Struct(t *testing.
 	assert := assert.New(t)
 	converter := PokemonPaginationWebServicePresenter{}
 
-	expected := PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]]{Data: core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 4, 1, 0), Status: http.StatusOK}
+	expected := HttpResponse[core.PaginationResult[domain.Pokemon]]{Data: core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 4, 1, 0), Status: http.StatusOK}
 	actual, _ := converter.Convert(core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 4, 1, 0), nil)
 
 	assert.Equal(expected, actual)
@@ -23,7 +23,7 @@ func TestPlayerPokemonWebServicePresenter_Should_Return_HttpError_Struc(t *testi
 	assert := assert.New(t)
 	converter := PokemonPaginationWebServicePresenter{}
 
-	expected := PokemonPaginationHttpResult[core.PaginationResult[domain.Pokemon]]{Data: core.PaginationResult[domain.Pokemon]{}, Error: "Une erreure s'est produite", Status: http.StatusBadRequest}
+	expected := HttpResponse[core.PaginationResult[domain.Pokemon]]{Data: core.PaginationResult[domain.Pokemon]{}, Error: "Une erreure s'est produite", Status: http.StatusBadRequest}
 	actual, _ := converter.Convert(core.NewPaginationResult([]domain.Pokemon{{Name: "pikatchu"}, {Name: "Tortank"}}, 4, 1, 0), errors.New("Une erreure s'est produite"))
 
 	assert.Equal(expected, actual)
