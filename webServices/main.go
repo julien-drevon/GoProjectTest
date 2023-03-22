@@ -16,6 +16,9 @@ type configuration struct {
 	ReferentialController controller.PokemonReferentialController[core.PaginationResult[domain.Pokemon]]
 }
 
+type ReferentialWebService struct {
+}
+
 func main() {
 	//repo, _ := gateway.NewRepoForWithPersistance("pokedex.json")
 	controller := controller.NewReferentialController()
@@ -36,17 +39,21 @@ func referential(controller controller.PokemonReferentialController[presenter.Ht
 		result := <-resultChan
 		err := <-errChan
 
-		IndentedJSON(
-			ginContext,
-			func(c *gin.Context) {
-				if result.Error != "" {
-					c.IndentedJSON(result.Status, result.Error)
-				} else {
-					c.IndentedJSON(result.Status, result.Data)
-				}
-			},
-			err)
+		IndentedReferentialJSON(ginContext, result, err)
 	}
+}
+
+func IndentedReferentialJSON(ginContext *gin.Context, result presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], err error) {
+	IndentedJSON(
+		ginContext,
+		func(c *gin.Context) {
+			if result.Error != "" {
+				c.IndentedJSON(result.Status, result.Error)
+			} else {
+				c.IndentedJSON(result.Status, result.Data)
+			}
+		},
+		err)
 }
 
 func GetReferentialValue(controller controller.PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]], stringChan chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], errChan chan error) {
