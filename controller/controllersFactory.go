@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"clean/core"
 	"gateway"
 	"pokedex/domain"
 	"presenter"
@@ -22,6 +21,7 @@ func NewControllerFileWeb(repo *gateway.Repo) PokedexController[domain.PokemonsP
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
 		ReferentialGateway: gateway.GetPokemonReferentialFileGateway{}}
 }
+
 func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
 
 	return PokemonReferentialController[string]{
@@ -29,9 +29,9 @@ func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
 		ReferentialGateway:   gateway.GetPokemonReferentialUnitTestsGateway{}}
 }
 
-func NewReferentialController() PokemonReferentialController[core.PaginationResult[domain.Pokemon]] {
+func NewReferentialController() PokemonReferentialController[presenter.PokemonPaginationHttpResult] {
 
-	return PokemonReferentialController[core.PaginationResult[domain.Pokemon]]{
+	return PokemonReferentialController[presenter.PokemonPaginationHttpResult]{
 		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
 		ReferentialGateway:   gateway.GetPokemonReferentialFileGateway{}}
 }

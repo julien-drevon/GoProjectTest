@@ -6,6 +6,7 @@ import (
 	"gateway"
 	"net/http"
 	"pokedex/domain"
+	"presenter"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,27 +27,30 @@ func main() {
 	router.Run("localhost:8080")
 }
 
-func referential(controller controller.PokemonReferentialController[core.PaginationResult[domain.Pokemon]]) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		var result chan core.PaginationResult[domain.Pokemon] = make(chan core.PaginationResult[domain.Pokemon])
-		var err chan error = make(chan error)
+func referential(controller controller.PokemonReferentialController[presenter.PokemonPaginationHttpResult]) gin.HandlerFunc {
+	return func(ginContext *gin.Context) {
+		var resultChan chan presenter.PokemonPaginationHttpResult = make(chan presenter.PokemonPaginationHttpResult)
+		var errChan chan error = make(chan error)
 
-		go GetReferentialValue(controller, result, err)
-		ReturnJSON(c, <-result, <-err)
+		go GetReferentialValue(controller, resultChan, errChan)
+		result := <-resultChan
+		err := <-errChan
+
+		IndentedJSON(ginContext, func(c *gin.Context) { c.IndentedJSON(result.STATUS, result.Data) }, err)
 	}
 }
 
-func GetReferentialValue(controller controller.PokemonReferentialController[core.PaginationResult[domain.Pokemon]], stringChan chan core.PaginationResult[domain.Pokemon], errChan chan error) {
+func GetReferentialValue(controller controller.PokemonReferentialController[presenter.PokemonPaginationHttpResult], stringChan chan presenter.PokemonPaginationHttpResult, errChan chan error) {
 	presenter := controller.GetReferential()
 	result, err := presenter.Print()
 	stringChan <- result
 	errChan <- err
 }
 
-func ReturnJSON[T any](c *gin.Context, data T, err error) {
+func IndentedJSON(c *gin.Context, indentedJsonWithoutErr func(*gin.Context), err error) {
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, err)
 	} else {
-		c.IndentedJSON(http.StatusOK, data)
+		indentedJsonWithoutErr(c)
 	}
 }

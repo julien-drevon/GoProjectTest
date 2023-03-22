@@ -7,7 +7,7 @@ import (
 type TransformPresenter[TDataIn any, TDataOut any] struct {
 	Result    TDataIn
 	Err       error
-	Converter func(TDataIn) (TDataOut, error) //IConverting[TDataIn, TDataOut]
+	Converter func(TDataIn) (TDataOut, error)
 }
 
 func ConvertData[TDataIn any, TDataOut any](converter func(TDataIn) (TDataOut, error), data TDataIn) (TDataOut, error) {
