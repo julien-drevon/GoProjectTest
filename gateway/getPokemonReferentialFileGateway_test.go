@@ -10,7 +10,7 @@ import (
 func TestGetPokemonReferentialFile(t *testing.T) {
 	assert := assert.New(t)
 
-	service := GetPokemonReferentialFileGateway{}
+	service := GetPokemonReferentialFileGateway{FilePath: "pokemons.json"}
 	expected := 4
 	actual, err := service.GetPokedex(domain.GetPokemonQuery{})
 	assert.Equal(nil, err)
@@ -20,7 +20,7 @@ func TestGetPokemonReferentialFile(t *testing.T) {
 func Test_IsAny_GetPokemonReferentialFile(t *testing.T) {
 	assert := assert.New(t)
 
-	service := GetPokemonReferentialFileGateway{}
+	service := GetPokemonReferentialFileGateway{FilePath: "pokemons.json"}
 
 	actual := service.IsExist(domain.AddPokemonsQuery{Names: []string{"pikatchu", "bulbizare"}})
 	assert.Equal(true, actual)

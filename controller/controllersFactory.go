@@ -20,7 +20,7 @@ func NewControllerFileWeb(repo *gateway.Repo) PokedexController[domain.PokemonsP
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
 		AddPokemonGateway:  gateway.AddPokemonGateway{Context: repo},
-		ReferentialGateway: gateway.GetPokemonReferentialFileGateway{}}
+		ReferentialGateway: gateway.GetPokemonReferentialFileGateway{FilePath: "pokemons.json"}}
 }
 
 func NewPokemonReferentialForUnitsTests() PokemonReferentialController[string] {
@@ -34,5 +34,5 @@ func NewReferentialController() PokemonReferentialController[presenter.HttpRespo
 
 	return PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]]{
 		ReferentialPresenter: presenter.NewPokemonPaginationWebServicePresenter,
-		ReferentialGateway:   gateway.GetPokemonReferentialFileGateway{}}
+		ReferentialGateway:   gateway.GetPokemonReferentialFileGateway{FilePath: "pokemons.json"}}
 }

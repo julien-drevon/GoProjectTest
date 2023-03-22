@@ -8,9 +8,10 @@ import (
 
 var POKEMONREFERENTIEL_CACHE []domain.Pokemon
 
-const PATH_POKEMONREFERENTIEL_FILE = "pokemons.json"
+//const PATH_POKEMONREFERENTIEL_FILE = "pokemons.json"
 
 type GetPokemonReferentialFileGateway struct {
+	FilePath string
 }
 
 func (this GetPokemonReferentialFileGateway) GetPokedex(query domain.GetPokemonQuery) (core.PaginationResult[domain.Pokemon], error) {
@@ -19,7 +20,7 @@ func (this GetPokemonReferentialFileGateway) GetPokedex(query domain.GetPokemonQ
 }
 
 func (this GetPokemonReferentialFileGateway) GetCache() ([]domain.Pokemon, error) {
-	path := PATH_POKEMONREFERENTIEL_FILE
+	path := this.FilePath
 	if POKEMONREFERENTIEL_CACHE == nil {
 		zeroValue := []domain.Pokemon{}
 		pokeLi, errUn := core.UnserializeFile[[]domain.Pokemon](path)

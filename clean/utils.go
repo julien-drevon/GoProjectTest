@@ -39,5 +39,5 @@ func UnserializeFile[T any](path string) (T, error) {
 
 		return context, err
 	}
-	return context, errors.New("File" + path + " not exist")
+	return context, errors.New("File " + path + " not exist")
 }
