@@ -52,7 +52,6 @@ func Test_Unserialize_File(t *testing.T) {
 	os.WriteFile(path, []byte("{\"Test\":\"42\"}"), os.ModeAppend)
 
 	actual, _ := UnserializeFile[SerializeTest](path)
-
 	assert.Equal(SerializeTest{Test: "42"}, actual)
 
 	DeleteUtilsTestFile(path)
