@@ -44,3 +44,16 @@ func DeleteUtilsTestFile(path string) {
 		os.Remove(path)
 	}
 }
+
+func Test_Unserialize_File(t *testing.T) {
+	assert := assert.New(t)
+	path := "Test_Unserialize_File.json"
+	DeleteUtilsTestFile(path)
+	os.WriteFile(path, []byte("{\"Test\":\"42\"}"), os.ModeAppend)
+
+	actual, _ := UnserializeFile[SerializeTest](path)
+
+	assert.Equal(SerializeTest{Test: "42"}, actual)
+
+	DeleteUtilsTestFile(path)
+}
