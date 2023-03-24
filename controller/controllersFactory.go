@@ -8,6 +8,7 @@ import (
 )
 
 func NewControllerForUnitTests(repo *gateway.Repo) PokedexController[string] {
+
 	return PokedexController[string]{
 		ListPresenter:      presenter.NewPokemonPlayerToJsonStringPresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},
@@ -16,6 +17,7 @@ func NewControllerForUnitTests(repo *gateway.Repo) PokedexController[string] {
 }
 
 func NewControllerFileWeb(repo *gateway.Repo) PokedexController[presenter.HttpResponse[domain.PokemonsPlayer]] {
+
 	return PokedexController[presenter.HttpResponse[domain.PokemonsPlayer]]{
 		ListPresenter:      presenter.NewPlayerPokemonWebServicePresenter,
 		GetPokemonGateway:  gateway.GetAllMyPokemonGateway{Context: repo},

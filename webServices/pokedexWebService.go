@@ -3,24 +3,53 @@ package main
 import (
 	"controller"
 	"pokedex/domain"
+	"presenter"
+
+	"github.com/gin-gonic/gin"
 )
 
 type PokedexWebService struct {
-	PokedexController controller.PokedexController[domain.PokemonsPlayer]
+	PokedexController controller.PokedexController[presenter.HttpResponse[domain.PokemonsPlayer]]
 }
 
 type AddPokemonWebRequest struct {
-	Joueur string
+	Player string
 	Name   string
 }
 
-// func (this PokedexWebService) Post(addRequest AddPokemonWebRequest) {
-// 	var resultChan chan presenter.HttpResponse[core.PokemonsPlayer] = make(chan presenter.HttpResponse[core.PokemonsPlayer])
-// 	var errChan chan error = make(chan error)
+func (this PokedexWebService) Post() func(*gin.Context) {
+	return func(ginContext *gin.Context) {
 
-// 	pokedexControllr := this.PokedexController
-// 	pokedexControllr.AddPokemons(addRequest.Joueur, []string{addRequest.Name})
-// }
+		var addRequest AddPokemonWebRequest
+		err := ginContext.BindJSON(&addRequest)
+
+		if err != nil {
+			IndentedJSON(ginContext, nil, err)
+			return
+		}
+		// var resultChan chan presenter.HttpResponse[core.PokemonsPlayer] = make(chan presenter.HttpResponse[core.PokemonsPlayer])
+		// var errChan chan error = make(chan error)
+
+		pokedexControllr := this.PokedexController
+		presenter := pokedexControllr.AddPokemons(addRequest.Player, []string{addRequest.Name})
+
+		result, err := presenter.Print()
+
+		// result := <-resultChan
+		// err := <-errChan
+		IndentedJSON(
+			ginContext,
+			func(c *gin.Context) {
+				if result.Error != "" {
+					c.IndentedJSON(result.Status, result.Error)
+				} else {
+					c.IndentedJSON(result.Status, result.Data)
+				}
+			},
+			err)
+	}
+
+}
 
 // func (this ReferentialWebService) GetReferential() gin.HandlerFunc {
 // 	return func(ginContext *gin.Context) {

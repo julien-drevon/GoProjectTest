@@ -15,7 +15,7 @@ type configuration struct {
 }
 
 func main() {
-	repo, _ := gateway.NewRepoForWithPersistance("pokedex1.json")
+	repo, _ := gateway.NewRepoWithPersistance("pokedex1.json")
 	config := &configuration{Repo: repo}
 	Start(config)
 }

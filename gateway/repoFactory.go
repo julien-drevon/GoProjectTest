@@ -9,7 +9,7 @@ func NewRepoForUnitTests() Repo {
 	return Repo{Context: make(map[string][]domain.Pokemon), PersistFile: false}
 }
 
-func NewRepoForWithPersistance(path string) (Repo, error) {
+func NewRepoWithPersistance(path string) (Repo, error) {
 	var context map[string][]domain.Pokemon = make(map[string][]domain.Pokemon)
 	var err error
 
@@ -19,3 +19,5 @@ func NewRepoForWithPersistance(path string) (Repo, error) {
 
 	return Repo{Context: context, PersistFile: true, Path: path}, err
 }
+
+//NewRepoWithPersistance

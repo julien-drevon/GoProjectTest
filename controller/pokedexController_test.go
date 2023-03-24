@@ -22,7 +22,6 @@ func TestGetPokemon(t *testing.T) {
 
 func TestAddWithEmptyName(t *testing.T) {
 	assert := assert.New(t)
-
 	controller := NewControllerTest()
 	presenter := controller.AddPokemons("", []string{"pikatchu"})
 
