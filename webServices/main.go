@@ -12,11 +12,11 @@ type configuration struct {
 }
 
 func main() {
-	//repo, _ := gateway.NewRepoForWithPersistance("pokedex.json")
+	repo, _ := gateway.NewRepoWithPersistance("pokedex.json")
 	//config := configuration{Repo: repo, ReferentialController: controller}
 	router := gin.Default()
 	router.GET("/referential", (ReferentialWebService{ReferentialController: controller.NewReferentialController()}).GetReferential())
-	//router.POST("/albums")
+	router.POST("/post", (PokedexWebService{PokedexController: controller.NewControllerFileWeb(&repo)}).Post())
 
 	router.Run("localhost:8080")
 }
