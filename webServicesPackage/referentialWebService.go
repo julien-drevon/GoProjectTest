@@ -1,4 +1,4 @@
-package main
+package webServicesPackage
 
 import (
 	"clean/core"
@@ -13,7 +13,7 @@ type ReferentialWebService struct {
 	ReferentialController *controller.PokemonReferentialController[presenter.HttpResponse[core.PaginationResult[domain.Pokemon]]]
 }
 
-func (this ReferentialWebService) GetReferential() gin.HandlerFunc {
+func (this *ReferentialWebService) GetReferential() gin.HandlerFunc {
 	return func(ginContext *gin.Context) {
 		var resultChan chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]] = make(chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]])
 		var errChan chan error = make(chan error)
@@ -26,7 +26,7 @@ func (this ReferentialWebService) GetReferential() gin.HandlerFunc {
 	}
 }
 
-func (this ReferentialWebService) IndentedJSON(ginContext *gin.Context, result presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], err error) {
+func (this *ReferentialWebService) IndentedJSON(ginContext *gin.Context, result presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], err error) {
 	IndentedJSON(
 		ginContext,
 		func(c *gin.Context) {
@@ -39,7 +39,7 @@ func (this ReferentialWebService) IndentedJSON(ginContext *gin.Context, result p
 		err)
 }
 
-func (this ReferentialWebService) GetReferentialValue(stringChan chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], errChan chan error) {
+func (this *ReferentialWebService) GetReferentialValue(stringChan chan presenter.HttpResponse[core.PaginationResult[domain.Pokemon]], errChan chan error) {
 	refCotroller := this.ReferentialController
 	presenter := refCotroller.GetReferential()
 	result, err := presenter.Print()

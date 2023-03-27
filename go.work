@@ -9,4 +9,5 @@ use (
 	./domain
 	./presenter
 	./webServices
+	./webServicesPackage
 )

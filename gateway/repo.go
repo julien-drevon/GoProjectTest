@@ -12,7 +12,7 @@ import (
 type Repo struct {
 	Context     map[string][]domain.Pokemon
 	PersistFile bool
-	Mutex       sync.Mutex
+	Mutex       *sync.Mutex
 	Path        string
 }
 
